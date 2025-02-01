@@ -1,1 +1,2 @@
-export 'api_data/api_data.dart';
+export 'api_data/post.dart';
+export 'api_data/get.dart';
