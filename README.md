@@ -148,7 +148,7 @@ Endpoint: https://developer-lostark.game.onstove.com/markets/
 }
 ```
 
-- **GET /markets/items/price-trends**
+- **GET /news/notices**
 
 Endpoint: https://developer-lostark.game.onstove.com/news/notices
 
