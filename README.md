@@ -76,31 +76,75 @@ Endpoint: https://developer-lostark.game.onstove.com/markets/
 
 {
     "_comment": "parameter",
-    "sort": "GRADE",
-    "categoryCode": int,
-    "itemName": string,
-    "PageNo": 0,
-    "SortCondition": "ASC"
+    "properties": {
+        "sort": {
+            "type": "string"
+        },
+        "categoryCode": {
+            "type": "integer"
+        },
+        "itemName": {
+            "type": "string"
+        },
+        "PageNo": {
+            "type": "integer"
+        },
+        "SortCondition": {
+            "type": "string"
+        }
+    },
+    "required": ["sort", "categoryCode", "itemName", "PageNo", "SortCondition"]
 }
 
 {
     "_comment": "response",
-    "PageNo": int,
-    "PageSize": int,
-    "TotalCount": int,
-    "Items": [
-        {
-            "Id": int,
-            "Name": string,
-            "Grade": string,
-            "Icon": string,
-            "BundleCount": int,
-            "TradeRemainCount": int (default: null),
-            "YDayAvgPrice": int,
-            "RecentPrice": int,
-            "CurrentMinPrice": int
+    "properties": {
+        "PageNo": {
+            "type": "integer"
+        },
+        "PageSize": {
+            "type": "integer"
+        },
+        "TotalCount": {
+            "type": "integer"
+        },
+        "Items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                        "type": "integer"
+                    },
+                    "Name": {
+                        "type": "string"
+                    },
+                    "Grade": {
+                        "type": "string"
+                    },
+                    "Icon": {
+                        "type": "string"
+                    },
+                    "BundleCount": {
+                        "type": "integer"
+                    },
+                    "TradeRemainCount": {
+                        "type": ["integer", "null"]
+                    },
+                    "YDayAvgPrice": {
+                        "type": "integer"
+                    },
+                    "RecentPrice": {
+                        "type": "integer"
+                    },
+                    "CurrentMinPrice": {
+                        "type": "integer"
+                    }
+                }
+            }
         }
-    ]
+    },
+    "required": ["PageNo", "PageSize", "TotalCount", "Items"]
 }
 ```
 
@@ -110,11 +154,22 @@ Endpoint: https://developer-lostark.game.onstove.com/news/notices
 
 ```json
 {
-    "_comment": "response"
-    "Title": string,
-    "Date": string,
-    "Link": string,
-    "Type": string
+  "_comment": "response",
+  "properties": {
+    "Title": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "string"
+    },
+    "Link": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "string"
+    }
+  },
+  "required": ["Title", "Date", "Link", "Type"]
 }
 ```
 
@@ -125,12 +180,22 @@ Endpoint: https://developer-lostark.game.onstove.com/news/notices
 Endpoint: https://lostarkapi.info/crystal/
 
 ```json
-
 {
-    "_comment": "response",
-    "Buy": string,
-    "Sell": string,
-    "Date": string,
-    "Result": string
+  "_comment": "response",
+  "properties": {
+    "Buy": {
+      "type": "string"
+    },
+    "Sell": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "string"
+    },
+    "Result": {
+      "type": "string"
+    }
+  },
+  "required": ["Buy", "Sell", "Date", "Result"]
 }
 ```
