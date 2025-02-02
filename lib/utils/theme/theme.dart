@@ -10,9 +10,7 @@ class AppTheme {
       ThemeData.light().textTheme,
     ),
     colorScheme: const ColorScheme.light(
-      primary: Colors.blue,
-      secondary: Colors.blue,
-    ),
+        primary: Colors.blue, secondary: Color.fromARGB(164, 0, 88, 139)),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.blue,
       foregroundColor: Colors.white,
@@ -30,7 +28,7 @@ class AppTheme {
     ),
     colorScheme: ColorScheme.dark(
       primary: const Color.fromARGB(165, 63, 81, 181),
-      secondary: const Color.fromARGB(165, 63, 81, 181),
+      secondary: Color.fromARGB(165, 30, 30, 90),
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: const Color.fromARGB(165, 63, 81, 181),

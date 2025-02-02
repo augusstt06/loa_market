@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loa_market/widgets/search_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -19,10 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('LOA Market'),
       ),
-      body: const Center(
-        child: Text(
-          'Hi Flutter',
-        ),
+      body: Column(
+        children: [
+          SearchWidget(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: widget.toggleTheme,
