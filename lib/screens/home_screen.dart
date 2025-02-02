@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({
+    super.key,
+    required this.toggleTheme,
+  });
+
+  final void Function() toggleTheme;
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('LOA Market'),
+      ),
+      body: const Center(
+        child: Text(
+          'Hi Flutter',
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: widget.toggleTheme,
+        child: Icon(
+          Theme.of(context).brightness == Brightness.dark
+              ? Icons.sunny
+              : Icons.nightlight,
+        ),
+      ),
+    );
+  }
+}
