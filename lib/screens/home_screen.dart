@@ -27,10 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: widget.toggleTheme,
         child: Icon(
-          Theme.of(context).brightness == Brightness.dark
-              ? Icons.sunny
-              : Icons.nightlight,
-        ),
+            Theme.of(context).brightness == Brightness.dark
+                ? Icons.sunny
+                : Icons.nightlight,
+            color: Colors.white),
       ),
     );
   }
