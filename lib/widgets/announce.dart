@@ -24,7 +24,7 @@ class Announce extends StatelessWidget {
             children: [
               Center(
                 child: Text(
-                  '공지사항',
+                  '📌 개발 공지 📌',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         color: Colors.white,
                       ),
