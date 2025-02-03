@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 
 Future<List<dynamic>> fetchNews() async {
   final String apiUrl = dotenv.env['LOA_GET_NEWS_API_ENDPOINT'] ?? '';
+  if (apiUrl == '') throw Exception('API URL is not set');
+
   final response = await http.get(Uri.parse(apiUrl), headers: {
     'accept': 'application/json',
     'authorization': 'bearer ${dotenv.env['LOA_API_KEY']}',
