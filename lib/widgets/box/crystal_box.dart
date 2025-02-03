@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -15,11 +17,13 @@ class CrystalBox extends StatefulWidget {
 class _CrystalBoxState extends State<CrystalBox> {
   Map<String, dynamic>? crystalInfo;
   bool isLoading = true;
+  Timer? _rerun;
 
   @override
   void initState() {
     super.initState();
     fetchCrystalInfo();
+    _reRunGetCrystalInfo();
   }
 
   Future<void> fetchCrystalInfo() async {
@@ -34,6 +38,19 @@ class _CrystalBoxState extends State<CrystalBox> {
         isLoading = false;
       });
     }
+  }
+
+  void _reRunGetCrystalInfo() {
+    _rerun = Timer.periodic(Duration(hours: 1), (timer) {
+      fetchCrystalInfo();
+    });
+  }
+
+  // 위젯이 필요없어지면 타이머 해제
+  @override
+  void dispose() {
+    _rerun?.cancel();
+    super.dispose();
   }
 
   @override
