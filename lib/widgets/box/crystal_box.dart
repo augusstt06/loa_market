@@ -56,7 +56,8 @@ class _CrystalBoxState extends State<CrystalBox> {
                 ? Progress()
                 : Column(
                     children: [
-                      CustomText(title: '크리스탈 시세', fontSize: 'large'),
+                      CustomText(
+                          title: '크리스탈 시세', fontSize: 'large', isBold: true),
                       const Gap(20),
                       if (crystalInfo != null)
                         buildPriceRow('판매가', crystalInfo?['Sell']),

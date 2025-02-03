@@ -58,8 +58,9 @@ class _NewsBoxState extends State<NewsBox> {
                 children: [
                   Center(
                     child: CustomText(
-                      title: '최근 업데이트',
+                      title: '최근 로아 소식',
                       fontSize: 'large',
+                      isBold: true,
                     ),
                   ),
                   const Gap(20),

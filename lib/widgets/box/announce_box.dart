@@ -27,6 +27,7 @@ class AnnounceBox extends StatelessWidget {
                 child: CustomText(
                   title: '📌 개발 공지 📌',
                   fontSize: 'large',
+                  isBold: true,
                 ),
               ),
               const Gap(10),
