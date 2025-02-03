@@ -10,9 +10,11 @@ class AppTheme {
       ThemeData.light().textTheme,
     ),
     colorScheme: const ColorScheme.light(
-        primary: Colors.blue, secondary: Color.fromARGB(164, 0, 88, 139)),
+      primary: Colors.blue,
+      secondary: Colors.blueAccent,
+    ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blueAccent,
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
@@ -22,16 +24,16 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    primaryColor: const Color.fromARGB(165, 63, 81, 181),
+    primaryColor: Colors.indigo,
     textTheme: GoogleFonts.sunflowerTextTheme(
       ThemeData.dark().textTheme,
     ),
     colorScheme: ColorScheme.dark(
-      primary: const Color.fromARGB(165, 63, 81, 181),
-      secondary: Color.fromARGB(165, 30, 30, 90),
+      primary: Colors.indigo,
+      secondary: Colors.indigo[700]!,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: const Color.fromARGB(165, 63, 81, 181),
+      backgroundColor: Colors.indigo[700]!,
       foregroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,

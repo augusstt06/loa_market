@@ -42,10 +42,10 @@ class _NewsState extends State<News> {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.secondary,
               width: 3,
             ),
           ),
