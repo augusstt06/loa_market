@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:loa_market/widgets/box/announce_box.dart';
+import 'package:loa_market/widgets/box/crystal_box.dart';
 import 'package:loa_market/widgets/box/news_box.dart';
 import 'package:loa_market/widgets/basic/search.dart';
 
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const AnnounceBox(),
           NewsBox(),
+          CrystalBox(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
