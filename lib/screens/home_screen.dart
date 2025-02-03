@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/widgets/announce.dart';
-import 'package:loa_market/widgets/notice.dart';
+import 'package:loa_market/widgets/news.dart';
 import 'package:loa_market/widgets/search_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SearchWidget(),
           ),
           Announce(),
-          Notice(),
+          News(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
