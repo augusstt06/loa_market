@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:loa_market/widgets/basic/custom_text.dart';
 
-class Announce extends StatelessWidget {
-  const Announce({super.key});
+class AnnounceBox extends StatelessWidget {
+  const AnnounceBox({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +24,19 @@ class Announce extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Text(
-                  '📌 개발 공지 📌',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: Colors.white,
-                      ),
+                child: CustomText(
+                  title: '📌 개발 공지 📌',
+                  fontSize: 'large',
                 ),
               ),
               const Gap(10),
-              Text(
-                '별칭으로도 아이템 검색이 가능합니다.',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+              CustomText(
+                title: '별칭으로도 아이템 검색이 가능합니다.',
+                fontSize: 'medium',
               ),
-              Text(
-                '숨결 검색시, 용암/빙하의 숨결과 태양의 가호/축복/은총이 함께 리스트업 됩니다.',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                    ),
+              CustomText(
+                title: '숨결 검색시, 용암/빙하의 숨결과 태양의 가호/축복/은총이 함께 리스트업 됩니다.',
+                fontSize: 'small',
               ),
             ],
           ),

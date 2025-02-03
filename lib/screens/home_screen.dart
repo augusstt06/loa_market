@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:loa_market/widgets/announce.dart';
-import 'package:loa_market/widgets/news.dart';
-import 'package:loa_market/widgets/search_widget.dart';
+import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/box/announce_box.dart';
+import 'package:loa_market/widgets/box/news_box.dart';
+import 'package:loa_market/widgets/basic/search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -20,16 +21,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LOA Market'),
+        title: CustomText(title: 'LOA Market', fontSize: 'large'),
       ),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
-            child: SearchWidget(),
+            child: const Search(),
           ),
-          Announce(),
-          News(),
+          const AnnounceBox(),
+          NewsBox(),
         ],
       ),
       floatingActionButton: FloatingActionButton(

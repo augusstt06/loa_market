@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:loa_market/service/service.dart';
+import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:loa_market/widgets/basic/progress.dart';
 
-class News extends StatefulWidget {
-  const News({super.key});
+class NewsBox extends StatefulWidget {
+  const NewsBox({super.key});
 
   @override
-  State<News> createState() => _NewsState();
+  State<NewsBox> createState() => _NewsBoxState();
 }
 
-class _NewsState extends State<News> {
+class _NewsBoxState extends State<NewsBox> {
   String? title;
   String? date;
   bool isLoading = true;
@@ -55,15 +57,13 @@ class _NewsState extends State<News> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Text(
-                      '최근 업데이트',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: Colors.white,
-                          ),
+                    child: CustomText(
+                      title: '최근 업데이트',
+                      fontSize: 'large',
                     ),
                   ),
                   const Gap(20),
-                  if (isLoading) CircularProgressIndicator(),
+                  if (isLoading) Progress(),
                   if (!isLoading && newsList != null)
                     SizedBox(
                       height: 100,
@@ -76,14 +76,9 @@ class _NewsState extends State<News> {
                               onTap: () {
                                 launchUrl(Uri.parse(newsList![index]['Link']));
                               },
-                              child: Text(
-                                newsList![index]['Title'],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      color: Colors.white,
-                                    ),
+                              child: CustomText(
+                                title: newsList![index]['Title'],
+                                fontSize: 'medium',
                               ),
                             ),
                           );
