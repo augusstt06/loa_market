@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: widget.toggleTheme,
+        backgroundColor: Colors.amber,
         child: Icon(
             Theme.of(context).brightness == Brightness.dark
                 ? Icons.sunny
