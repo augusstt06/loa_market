@@ -23,6 +23,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: CustomText(title: 'LOA Market', fontSize: 'large'),
+        leading: IconButton(
+          onPressed: widget.toggleTheme,
+          icon: Icon(
+            Theme.of(context).brightness == Brightness.dark
+                ? Icons.sunny
+                : Icons.nightlight,
+            color: Colors.amber,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -35,15 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
           CrystalBox(),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: widget.toggleTheme,
-        backgroundColor: Colors.amber,
-        child: Icon(
-            Theme.of(context).brightness == Brightness.dark
-                ? Icons.sunny
-                : Icons.nightlight,
-            color: Colors.white),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: widget.toggleTheme,
+      //   backgroundColor: Colors.amber,
+      //   child: Icon(
+      //       Theme.of(context).brightness == Brightness.dark
+      //           ? Icons.sunny
+      //           : Icons.nightlight,
+      //       color: Colors.white),
+      // ),
     );
   }
 }
