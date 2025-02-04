@@ -1,5 +1,6 @@
 import '../../constant/constant.dart';
 
+// 우선 러프하게 이런 기능이다~정도만 구현 -> 수정예정
 int getItemCode(String itemName) {
   if (itemClassification(itemName) == 'reinforce') {
     return reinforceCode;
