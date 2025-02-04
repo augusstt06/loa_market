@@ -30,14 +30,15 @@ class AnnounceBox extends StatelessWidget {
                   isBold: true,
                 ),
               ),
-              const Gap(10),
+              const Gap(15),
               CustomText(
                 title: '별칭으로도 아이템 검색이 가능합니다.',
                 fontSize: 'medium',
               ),
+              const Gap(10),
               CustomText(
                 title: '숨결 검색시, 용암/빙하의 숨결과 태양의 가호/축복/은총이 함께 리스트업 됩니다.',
-                fontSize: 'small',
+                fontSize: 'medium',
               ),
             ],
           ),
