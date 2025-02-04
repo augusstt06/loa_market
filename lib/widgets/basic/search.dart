@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loa_market/screens/search_result_screen.dart';
 
 class Search extends StatelessWidget {
   const Search({super.key});
@@ -8,6 +9,14 @@ class Search extends StatelessWidget {
     return SearchBar(
       onChanged: (value) {
         print(value);
+      },
+      onSubmitted: (value) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SearchResultScreen(searchText: value),
+          ),
+        );
       },
       hintText: '아이템을 입력하세요. (e.g. 숨결)',
       trailing: [Icon(Icons.search)],
