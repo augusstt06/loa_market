@@ -1,17 +1,30 @@
 // 로아 개발 공홈 api
 // GET News 응답 모델
-class GetNewsResponse {
+
+typedef TGetNewsResponse = List<GetNewsItem>;
+
+class GetNewsItem {
   final String title;
   final String date;
   final String link;
   final String type;
 
-  GetNewsResponse({
+  GetNewsItem({
     required this.title,
     required this.date,
     required this.link,
     required this.type,
   });
+
+  // JSON을 GetNewsItem 객체로 변환하기 위한 factory 메서드
+  factory GetNewsItem.fromJson(Map<String, dynamic> json) {
+    return GetNewsItem(
+      title: json['Title'],
+      date: json['Date'],
+      link: json['Link'],
+      type: json['Type'],
+    );
+  }
 }
 
 // External API

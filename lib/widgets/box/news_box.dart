@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:loa_market/models/api_data/get.dart';
 import 'package:loa_market/service/service.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,7 +27,7 @@ class _NewsBoxState extends State<NewsBox> {
 
   Future<void> fetchNewsData() async {
     try {
-      final List<dynamic> newsData = await fetchNews();
+      final TGetNewsResponse newsData = await fetchNews();
       setState(() {
         newsList = newsData;
         isLoading = false;
@@ -75,10 +76,10 @@ class _NewsBoxState extends State<NewsBox> {
                             padding: const EdgeInsets.symmetric(vertical: 5),
                             child: InkWell(
                               onTap: () {
-                                launchUrl(Uri.parse(newsList![index]['Link']));
+                                launchUrl(Uri.parse(newsList![index].link));
                               },
                               child: CustomText(
-                                title: newsList![index]['Title'],
+                                title: newsList![index].title,
                                 fontSize: 'medium',
                               ),
                             ),
