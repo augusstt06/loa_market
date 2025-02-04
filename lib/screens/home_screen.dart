@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/basic/global_appbar.dart';
 import 'package:loa_market/widgets/box/announce_box.dart';
 import 'package:loa_market/widgets/box/crystal_box.dart';
 import 'package:loa_market/widgets/box/news_box.dart';
@@ -21,23 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: CustomText(title: 'LOA Market', fontSize: 'large'),
-        leading: IconButton(
-          onPressed: widget.toggleTheme,
-          icon: Icon(
-            Theme.of(context).brightness == Brightness.dark
-                ? Icons.sunny
-                : Icons.nightlight,
-            color: Colors.amber,
-          ),
-        ),
-      ),
+      appBar: GlobalAppBar(toggleTheme: widget.toggleTheme),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
-            child: const Search(),
+            child: Search(toggleTheme: widget.toggleTheme),
           ),
           const AnnounceBox(),
           NewsBox(),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loa_market/screens/search_result_screen.dart';
 
 class Search extends StatelessWidget {
-  const Search({super.key});
+  const Search({super.key, required this.toggleTheme});
+  final void Function() toggleTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,10 @@ class Search extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SearchResultScreen(searchText: value),
+          builder: (context) => SearchResultScreen(
+            searchText: value,
+            toggleTheme: toggleTheme,
+          ),
         ),
       );
     }
