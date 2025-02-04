@@ -25,6 +25,15 @@ class PostItemResponse {
     required this.totalCount,
     required this.items,
   });
+
+  factory PostItemResponse.fromJson(Map<String, dynamic> json) {
+    return PostItemResponse(
+      pageNo: json['PageNo'],
+      pageSize: json['PageSize'],
+      totalCount: json['TotalCount'],
+      items: json['Items'].map((item) => Item.fromJson(item)).toList(),
+    );
+  }
 }
 
 class Item {
@@ -49,4 +58,18 @@ class Item {
     required this.recentPrice,
     required this.currentMinPrice,
   });
+
+  factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
+      id: json['Id'],
+      name: json['Name'],
+      grade: json['Grade'],
+      icon: json['Icon'],
+      bundleCount: json['BundleCount'],
+      tradeRemainCount: json['TradeRemainCount'],
+      yDayAvgPrice: json['YDayAvgPrice'],
+      recentPrice: json['RecentPrice'],
+      currentMinPrice: json['CurrentMinPrice'],
+    );
+  }
 }

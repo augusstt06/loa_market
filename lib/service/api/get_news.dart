@@ -1,7 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:loa_market/models/api_data/get.dart';
+import 'package:loa_market/models/models.dart';
 
 Future<TGetNewsResponse> fetchNews() async {
   final String apiUrl = dotenv.env['LOA_GET_NEWS_API_ENDPOINT'] ?? '';
