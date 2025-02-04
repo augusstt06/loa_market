@@ -10,6 +10,7 @@ Future<GetCrystalResponse> fetchCrystal() async {
 
   final response = await http.get(Uri.parse(apiUrl));
   final Map<String, dynamic> crystalInfo = json.decode(response.body);
+
   if (crystalInfo['Result'] == "Success") {
     return GetCrystalResponse.fromJson(crystalInfo);
   } else {
