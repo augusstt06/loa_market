@@ -6,20 +6,32 @@ class Search extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String searchText = '';
+    void navigateToSearchResultScreen(BuildContext context, String value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SearchResultScreen(searchText: value),
+        ),
+      );
+    }
+
     return SearchBar(
       onChanged: (value) {
-        print(value);
+        searchText = value;
       },
       onSubmitted: (value) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SearchResultScreen(searchText: value),
-          ),
-        );
+        navigateToSearchResultScreen(context, value);
       },
       hintText: '아이템을 입력하세요. (e.g. 숨결)',
-      trailing: [Icon(Icons.search)],
+      trailing: [
+        IconButton(
+          onPressed: () {
+            navigateToSearchResultScreen(context, searchText);
+          },
+          icon: const Icon(Icons.search),
+        )
+      ],
       overlayColor:
           WidgetStatePropertyAll(Theme.of(context).colorScheme.secondary),
       shape: WidgetStateProperty.all(ContinuousRectangleBorder(
