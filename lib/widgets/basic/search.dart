@@ -27,7 +27,9 @@ class Search extends StatelessWidget {
       trailing: [
         IconButton(
           onPressed: () {
-            navigateToSearchResultScreen(context, searchText);
+            if (searchText.isNotEmpty) {
+              navigateToSearchResultScreen(context, searchText);
+            }
           },
           icon: const Icon(Icons.search),
         )
