@@ -12,6 +12,7 @@ Below are examples of items that meet the conditions:
 - **에스더의 기운**
 - **태양의 은총/축복/가호**
 - **용암/빙하의 숨결**
+- **유물/전설 각인서**
 
 ## Screens
 
