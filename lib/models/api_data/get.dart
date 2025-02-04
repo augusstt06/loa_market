@@ -41,4 +41,12 @@ class GetCrystalResponse {
     required this.date,
     required this.result,
   });
+  factory GetCrystalResponse.fromJson(Map<String, dynamic> json) {
+    return GetCrystalResponse(
+      buy: json['Buy'],
+      sell: json['Sell'],
+      date: json['Date'],
+      result: json['Result'],
+    );
+  }
 }

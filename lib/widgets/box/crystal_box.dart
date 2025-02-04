@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:loa_market/models/api_data/get.dart';
 
 import 'package:loa_market/service/api/get_crystal.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
@@ -15,7 +16,7 @@ class CrystalBox extends StatefulWidget {
 }
 
 class _CrystalBoxState extends State<CrystalBox> {
-  Map<String, dynamic>? crystalInfo;
+  GetCrystalResponse? crystalInfo;
   bool isLoading = true;
   Timer? _rerun;
 
@@ -28,7 +29,7 @@ class _CrystalBoxState extends State<CrystalBox> {
 
   Future<void> fetchCrystalInfo() async {
     try {
-      final Map<String, dynamic> crystalInfo = await fetchCrystal();
+      final GetCrystalResponse crystalInfo = await fetchCrystal();
       setState(() {
         this.crystalInfo = crystalInfo;
         isLoading = false;
@@ -77,9 +78,9 @@ class _CrystalBoxState extends State<CrystalBox> {
                           title: '크리스탈 시세', fontSize: 'large', isBold: true),
                       const Gap(20),
                       if (crystalInfo != null)
-                        buildPriceRow('판매가', crystalInfo?['Sell']),
+                        buildPriceRow('판매가', crystalInfo?.sell ?? ''),
                       const Gap(10),
-                      buildPriceRow('구매가', crystalInfo?['Buy']),
+                      buildPriceRow('구매가', crystalInfo?.buy ?? ''),
                     ],
                   ),
           ),
