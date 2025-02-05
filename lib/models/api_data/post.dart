@@ -36,7 +36,7 @@ class Item {
   final String icon;
   final int bundleCount;
   final int? tradeRemainCount;
-  final int yDayAvgPrice;
+  final double yDayAvgPrice;
   final int recentPrice;
   final int currentMinPrice;
 
@@ -53,8 +53,6 @@ class Item {
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
-    print('Creating Item from JSON: $json');
-
     return Item(
       id: json['Id'],
       name: json['Name'],

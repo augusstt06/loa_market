@@ -34,10 +34,10 @@ class _SearchState extends State<Search> {
 
   Future<void> fetchSearchItems(String itemName) async {
     try {
-      final List<Item> items = await fetchItems(itemName);
-      print(items);
+      final List<Item> itemResponse = await fetchItems(itemName);
+
       setState(() {
-        this.items = items;
+        items = itemResponse;
       });
     } catch (e) {
       setState(() {});

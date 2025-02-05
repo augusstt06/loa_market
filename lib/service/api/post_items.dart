@@ -20,21 +20,7 @@ Future<List<Item>> fetchItems(String item) async {
 
   if (response.statusCode == 200) {
     final List<dynamic> jsonResponse = json.decode(response.body)['Items'];
-    print('Fetched Items Count: ${jsonResponse.length}'); // jsonResponse의 길이 출력
-
-    final result = jsonResponse.map<Item>((jsonItem) {
-      return Item(
-        id: jsonItem['Id'],
-        name: jsonItem['Name'],
-        grade: jsonItem['Grade'],
-        icon: jsonItem['Icon'],
-        bundleCount: jsonItem['BundleCount'],
-        tradeRemainCount: jsonItem['TradeRemainCount'],
-        yDayAvgPrice: jsonItem['YDayAvgPrice'],
-        recentPrice: jsonItem['RecentPrice'],
-        currentMinPrice: jsonItem['CurrentMinPrice'],
-      );
-    }).toList();
+    final result = jsonResponse.map((item) => Item.fromJson(item)).toList();
 
     return result;
   } else {
