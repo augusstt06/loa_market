@@ -31,7 +31,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
             child: ListView.builder(
               itemCount: widget.items.length,
               itemBuilder: (context, index) {
-                return Text(widget.items[index].name);
+                return SizedBox(
+                  height: 100,
+                  child: Text(widget.items[index].name),
+                );
               },
             ),
           ),
