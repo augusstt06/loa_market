@@ -22,3 +22,21 @@ String itemClassification(String itemName) {
   }
   return 'engrave';
 }
+
+// 아이템 별명
+List<String> convertItemNickname(String itemName) {
+  switch (itemName) {
+    case '명파':
+      return ['명예의 파편'];
+    case '운파':
+      return ['운명의 파편'];
+    case '숨결':
+      return ['숨결', '가호', '은총', '축복'];
+    case '경명돌':
+      return ['경이로운 명예의 돌파석'];
+    case '찬명돌':
+      return ['찬란한 명예의 돌파석'];
+    default:
+      return [itemName];
+  }
+}
