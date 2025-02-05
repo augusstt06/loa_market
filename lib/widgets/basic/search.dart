@@ -20,12 +20,12 @@ class _SearchState extends State<Search> {
     super.initState();
   }
 
-  void navigateToSearchResultScreen(BuildContext context, String value) {
+  void navigateToSearchResultScreen(BuildContext context, List<Item> value) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => SearchResultScreen(
-          searchText: value,
+          items: value,
           toggleTheme: widget.toggleTheme,
         ),
       ),
@@ -56,12 +56,13 @@ class _SearchState extends State<Search> {
       hintText: '아이템을 입력하세요. (e.g. 숨결)',
       trailing: [
         IconButton(
-          onPressed: () {
-            // if (searchText.isNotEmpty) {
-            // navigateToSearchResultScreen(context, searchText);
-            fetchSearchItems(searchText);
-
-            // }
+          onPressed: () async {
+            if (searchText.isNotEmpty) {
+              //
+              await fetchSearchItems(searchText);
+              searchText = '';
+              navigateToSearchResultScreen(context, items);
+            }
           },
           icon: const Icon(Icons.search),
         )

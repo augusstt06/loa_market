@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:loa_market/widgets/basic/global_appbar.dart';
 
 class SearchResultScreen extends StatefulWidget {
   const SearchResultScreen({
     super.key,
-    required this.searchText,
+    required this.items,
     required this.toggleTheme,
   });
   final void Function() toggleTheme;
-  final String searchText;
+  final List<Item> items;
 
   @override
   State<SearchResultScreen> createState() => _SearchResultScreenState();
@@ -25,6 +26,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: CustomText(title: 'search text', fontSize: 'large'),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.items.length,
+              itemBuilder: (context, index) {
+                return Text(widget.items[index].name);
+              },
+            ),
           ),
         ],
       ),
