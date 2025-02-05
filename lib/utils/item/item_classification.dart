@@ -10,6 +10,7 @@ String getItemCode(String itemName) {
 
 String itemClassification(String itemName) {
   if (itemName.contains('오레하') ||
+      itemName.contains('아비도스') ||
       itemName.contains('숨결') ||
       itemName.contains('가호') ||
       itemName.contains('은총') ||
@@ -32,6 +33,8 @@ List<String> convertItemNickname(String itemName) {
       return ['운명의 파편'];
     case '숨결':
       return ['숨결', '가호', '은총', '축복'];
+    case '오레하':
+      return ['오레하', '아비도스'];
     case '경명돌':
       return ['경이로운 명예의 돌파석'];
     case '찬명돌':
