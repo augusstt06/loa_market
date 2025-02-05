@@ -14,6 +14,13 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   String searchText = '';
   ResponseItemList items = [];
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -28,9 +35,22 @@ class _SearchState extends State<Search> {
         builder: (context) => SearchResultScreen(
           items: value,
           toggleTheme: widget.toggleTheme,
+          onBack: () {
+            // 뒤로가기 실행시 상태 초기화
+            setState(() {
+              searchText = '';
+              items = [];
+            });
+            _searchController.clear();
+          },
         ),
       ),
-    );
+    ).then((_) {
+      setState(() {
+        searchText = '';
+        items = [];
+      });
+    });
   }
 
   Future<void> fetchSearchItems(String itemName) async {
@@ -48,12 +68,12 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+      controller: _searchController,
       onChanged: (value) {
-        searchText = value.trim();
+        setState(() {
+          searchText = value.trim();
+        });
       },
-      // onSubmitted: (value) {
-      //   navigateToSearchResultScreen(context, value);
-      // },
       hintText: '아이템을 입력하세요. (e.g. 숨결)',
       trailing: [
         IconButton(
@@ -61,7 +81,6 @@ class _SearchState extends State<Search> {
             if (searchText.isNotEmpty) {
               //
               await fetchSearchItems(searchText);
-              searchText = '';
               navigateToSearchResultScreen(context, items);
             }
           },
