@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 
+// FIXME: 팝업으로 바꿀지 고민중
 class ItemBox extends StatelessWidget {
   const ItemBox({super.key, required this.item});
   final Item item;
