@@ -12,24 +12,25 @@ Future<ResponseItemList> fetchItems(String item) async {
     'authorization': 'bearer ${dotenv.env['LOA_API_KEY']}',
   };
 
-  final items = convertItemNickname(item);
-  if (items.length == 1) {
+  final convertItems = convertItemNickname(item);
+
+  if (convertItems.length == 1) {
     final response =
         await http.post(Uri.parse(apiUrl), headers: reqHeader, body: {
       "Sort": "GRADE",
-      "CategoryCode": getItemCode(item),
-      "ItemName": convertItemNickname(item)[0],
+      "CategoryCode": getItemCode(convertItems[0]),
+      "ItemName": convertItems[0],
       "SortCondition": "ASC"
     });
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body)['Items'];
       final result = jsonResponse.map((item) => Item.fromJson(item)).toList();
-
+      print(result);
       return result;
     }
   } else {
     final List<Future<ResponseItemList>> futureList = [];
-    for (var item in items) {
+    for (var item in convertItems) {
       futureList.add(http.post(Uri.parse(apiUrl), headers: reqHeader, body: {
         "Sort": "GRADE",
         "CategoryCode": getItemCode(item),

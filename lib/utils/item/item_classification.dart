@@ -18,7 +18,8 @@ String itemClassification(String itemName) {
       itemName.contains('파괴') ||
       itemName.contains('수호') ||
       itemName.contains('에스더') ||
-      itemName.contains('기운')) {
+      itemName.contains('기운') ||
+      itemName.contains('파편')) {
     return 'reinforce';
   }
   return 'engrave';
@@ -28,7 +29,7 @@ String itemClassification(String itemName) {
 List<String> convertItemNickname(String itemName) {
   switch (itemName) {
     case '명파':
-      return ['명예의 파편'];
+      return ['명예의 파편', '운명의 파편'];
     case '운파':
       return ['운명의 파편'];
     case '숨결':
@@ -39,6 +40,10 @@ List<String> convertItemNickname(String itemName) {
       return ['경이로운 명예의 돌파석'];
     case '찬명돌':
       return ['찬란한 명예의 돌파석'];
+    case '저받':
+      return ['저주받은 인형'];
+    case '마흐':
+      return ['마나의 흐름'];
     default:
       return [itemName];
   }
