@@ -2,28 +2,41 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loa_market/models/models.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:loa_market/utils/utils.dart';
 
-Future<PostItemResponse> fetchItems(String item) async {
-  final String apiUrl = dotenv.env['LOA_POST_ITEMS_API_ENDPOINT'] ?? '';
+Future<List<Item>> fetchItems(String item) async {
+  final String apiUrl = dotenv.env['LOA_POST_ITEM_API_ENDPOINT'] ?? '';
   if (apiUrl == '') throw Exception('API URL is not set');
 
-  // FIX: request 형식에 맞추어서 수정
   final response = await http.post(Uri.parse(apiUrl), headers: {
     'accept': 'application/json',
     'authorization': 'bearer ${dotenv.env['LOA_API_KEY']}',
   }, body: {
-    'itemName': item,
-    // FIX: categoryCode 정리하기
-    'categoryCode': 1,
-    'sort': 'GRADE',
-    'pageNo': 0,
-    'sortCondition': 'ASC',
+    "Sort": "GRADE",
+    "CategoryCode": getItemCode(item),
+    "ItemName": convertItemNickname(item)[0],
+    "SortCondition": "ASC"
   });
 
   if (response.statusCode == 200) {
-    final Map<String, dynamic> jsonResponse = json.decode(response.body);
+    final List<dynamic> jsonResponse = json.decode(response.body)['Items'];
+    print('Fetched Items Count: ${jsonResponse.length}'); // jsonResponse의 길이 출력
 
-    return PostItemResponse.fromJson(jsonResponse);
+    final result = jsonResponse.map<Item>((jsonItem) {
+      return Item(
+        id: jsonItem['Id'],
+        name: jsonItem['Name'],
+        grade: jsonItem['Grade'],
+        icon: jsonItem['Icon'],
+        bundleCount: jsonItem['BundleCount'],
+        tradeRemainCount: jsonItem['TradeRemainCount'],
+        yDayAvgPrice: jsonItem['YDayAvgPrice'],
+        recentPrice: jsonItem['RecentPrice'],
+        currentMinPrice: jsonItem['CurrentMinPrice'],
+      );
+    }).toList();
+
+    return result;
   } else {
     throw Exception('Failed to load items');
   }

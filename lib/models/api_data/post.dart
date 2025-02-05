@@ -14,24 +14,17 @@ class PostItemRequest {
 }
 
 class PostItemResponse {
-  final int pageNo;
-  final int pageSize;
-  final int totalCount;
   final List<Item> items;
 
   PostItemResponse({
-    required this.pageNo,
-    required this.pageSize,
-    required this.totalCount,
     required this.items,
   });
 
   factory PostItemResponse.fromJson(Map<String, dynamic> json) {
     return PostItemResponse(
-      pageNo: json['PageNo'],
-      pageSize: json['PageSize'],
-      totalCount: json['TotalCount'],
-      items: json['Items'].map((item) => Item.fromJson(item)).toList(),
+      items: (json['Items'] as List<dynamic>)
+          .map((item) => Item.fromJson(item))
+          .toList(),
     );
   }
 }
@@ -60,6 +53,8 @@ class Item {
   });
 
   factory Item.fromJson(Map<String, dynamic> json) {
+    print('Creating Item from JSON: $json');
+
     return Item(
       id: json['Id'],
       name: json['Name'],
