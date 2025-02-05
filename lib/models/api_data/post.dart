@@ -1,5 +1,8 @@
 // 로아 개발 공홈 api
 // POST item 요청/응답 모델
+
+typedef ResponseItemList = List<Item>;
+
 class PostItemRequest {
   static const String sort = 'GRADE';
   final int categoryCode;

@@ -13,14 +13,15 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   String searchText = '';
-  List<Item> items = [];
+  ResponseItemList items = [];
 
   @override
   void initState() {
     super.initState();
   }
 
-  void navigateToSearchResultScreen(BuildContext context, List<Item> value) {
+  void navigateToSearchResultScreen(
+      BuildContext context, ResponseItemList value) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -34,7 +35,7 @@ class _SearchState extends State<Search> {
 
   Future<void> fetchSearchItems(String itemName) async {
     try {
-      final List<Item> itemResponse = await fetchItems(itemName);
+      final ResponseItemList itemResponse = await fetchItems(itemName);
 
       setState(() {
         items = itemResponse;
