@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:loa_market/models/api_data/post.dart';
+import 'package:loa_market/utils/utils.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 
 class ItemBox extends StatelessWidget {
@@ -42,7 +43,7 @@ class ItemBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CustomText(
-                          title: '${item.recentPrice}',
+                          title: addComma(item.recentPrice),
                           fontSize: 'medium',
                           isBold: true,
                         ),
