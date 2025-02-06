@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/models/api_data/post.dart';
-import 'package:loa_market/screens/search_result_screen.dart';
+import 'package:loa_market/widgets/bottom_sheet/search_result_sheet.dart';
 import 'package:loa_market/service/api/post_items.dart';
 
 class Search extends StatefulWidget {
-  const Search({super.key, required this.toggleTheme});
+  const Search({
+    super.key,
+    required this.toggleTheme,
+    required this.onSearch,
+  });
   final void Function() toggleTheme;
+  final void Function(List<Item> items) onSearch;
 
   @override
   State<Search> createState() => _SearchState();
@@ -32,17 +37,9 @@ class _SearchState extends State<Search> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchResultScreen(
+        builder: (context) => SearchResultSheet(
           items: value,
           toggleTheme: widget.toggleTheme,
-          onBack: () {
-            // 뒤로가기 실행시 상태 초기화
-            setState(() {
-              searchText = '';
-              items = [];
-            });
-            _searchController.clear();
-          },
         ),
       ),
     ).then((_) {
@@ -60,6 +57,8 @@ class _SearchState extends State<Search> {
       setState(() {
         items = itemResponse;
       });
+      widget.onSearch(items);
+      _searchController.clear();
     } catch (e) {
       setState(() {});
     }
@@ -81,14 +80,14 @@ class _SearchState extends State<Search> {
             if (searchText.isNotEmpty) {
               //
               await fetchSearchItems(searchText);
-              navigateToSearchResultScreen(context, items);
+              // navigateToSearchResultScreen(context, items);
             }
           },
           icon: const Icon(Icons.search),
         )
       ],
-      overlayColor:
-          WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
+      // overlayColor:
+      //     WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
       shape: WidgetStateProperty.all(ContinuousRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       )),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:loa_market/widgets/basic/global_appbar.dart';
+import 'package:loa_market/models/api_data/post.dart';
+import 'package:loa_market/widgets/bottom_sheet/search_result_sheet.dart';
+import 'package:loa_market/widgets/basic/appbar/global_appbar.dart';
 import 'package:loa_market/widgets/box/announce_box.dart';
 import 'package:loa_market/widgets/box/crystal_box.dart';
 import 'package:loa_market/widgets/box/news_box.dart';
@@ -18,6 +20,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Item> _searchResult = [];
+
+  void _showSearchResultDialog(List<Item> items) {
+    setState(() {
+      _searchResult = items;
+    });
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SearchResultSheet(
+            items: _searchResult,
+            toggleTheme: widget.toggleTheme,
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,22 +44,15 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Search(toggleTheme: widget.toggleTheme),
+            child: Search(
+                toggleTheme: widget.toggleTheme,
+                onSearch: _showSearchResultDialog),
           ),
           const AnnounceBox(),
           NewsBox(),
           CrystalBox(),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: widget.toggleTheme,
-      //   backgroundColor: Colors.amber,
-      //   child: Icon(
-      //       Theme.of(context).brightness == Brightness.dark
-      //           ? Icons.sunny
-      //           : Icons.nightlight,
-      //       color: Colors.white),
-      // ),
     );
   }
 }
