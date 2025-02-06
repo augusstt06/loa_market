@@ -40,18 +40,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalAppBar(toggleTheme: widget.toggleTheme),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Search(
-                toggleTheme: widget.toggleTheme,
-                onSearch: _showSearchResultDialog),
-          ),
-          const AnnounceBox(),
-          NewsBox(),
-          CrystalBox(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Search(
+                  toggleTheme: widget.toggleTheme,
+                  onSearch: _showSearchResultDialog),
+            ),
+            const AnnounceBox(),
+            NewsBox(),
+            CrystalBox(),
+          ],
+        ),
       ),
     );
   }
