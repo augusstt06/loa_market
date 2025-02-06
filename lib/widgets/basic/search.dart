@@ -86,8 +86,8 @@ class _SearchState extends State<Search> {
           icon: const Icon(Icons.search),
         )
       ],
-      overlayColor:
-          WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
+      // overlayColor:
+      //     WidgetStateProperty.all(Theme.of(context).colorScheme.secondary),
       shape: WidgetStateProperty.all(ContinuousRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       )),
