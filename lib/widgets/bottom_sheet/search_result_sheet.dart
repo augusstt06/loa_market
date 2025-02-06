@@ -35,11 +35,12 @@ class _SearchResultSheetState extends State<SearchResultSheet> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: widget.items.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: CustomText(
                         title: '검색 결과가 없습니다.',
-                        fontSize: 18,
-                        isWhite: false,
+                        fontSize: 20,
+                        isWhite:
+                            Theme.of(context).brightness == Brightness.dark,
                       ),
                     )
                   : ListView.builder(
