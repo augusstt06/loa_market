@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/models/api_data/post.dart';
-import 'package:loa_market/screens/search_result_screen.dart';
+import 'package:loa_market/widgets/bottom_sheet/search_result_sheet.dart';
 import 'package:loa_market/service/api/post_items.dart';
 
 class Search extends StatefulWidget {
@@ -37,7 +37,7 @@ class _SearchState extends State<Search> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchResultScreen(
+        builder: (context) => SearchResultSheet(
           items: value,
           toggleTheme: widget.toggleTheme,
         ),

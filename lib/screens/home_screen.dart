@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/models/api_data/post.dart';
-import 'package:loa_market/screens/search_result_screen.dart';
+import 'package:loa_market/widgets/bottom_sheet/search_result_sheet.dart';
 import 'package:loa_market/widgets/basic/global_appbar.dart';
 import 'package:loa_market/widgets/box/announce_box.dart';
 import 'package:loa_market/widgets/box/crystal_box.dart';
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return SearchResultScreen(
+          return SearchResultSheet(
             items: _searchResult,
             toggleTheme: widget.toggleTheme,
           );

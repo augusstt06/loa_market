@@ -5,8 +5,8 @@ import 'package:loa_market/widgets/basic/custom_text.dart';
 
 import 'package:loa_market/widgets/box/item_box.dart';
 
-class SearchResultScreen extends StatefulWidget {
-  const SearchResultScreen({
+class SearchResultSheet extends StatefulWidget {
+  const SearchResultSheet({
     super.key,
     required this.items,
     required this.toggleTheme,
@@ -15,10 +15,10 @@ class SearchResultScreen extends StatefulWidget {
   final List<Item> items;
 
   @override
-  State<SearchResultScreen> createState() => _SearchResultScreenState();
+  State<SearchResultSheet> createState() => _SearchResultSheetState();
 }
 
-class _SearchResultScreenState extends State<SearchResultScreen> {
+class _SearchResultSheetState extends State<SearchResultSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
