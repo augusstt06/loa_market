@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 
-// FIXME: 팝업으로 바꿀지 고민중
 class ItemBox extends StatelessWidget {
   const ItemBox({super.key, required this.item});
   final Item item;
@@ -17,39 +16,50 @@ class ItemBox extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(1),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              item.icon,
-              width: 60,
-              height: 60,
-            ),
-            const Gap(10),
-            CustomText(
-              title: item.name,
-              fontSize: 'medium',
-              isBold: true,
-            ),
-            const Gap(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  title: '${item.recentPrice}',
-                  fontSize: 'medium',
-                  isBold: true,
-                ),
-                const Gap(10),
-                Image.asset(
-                  'assets/images/골드.png',
-                  width: 20,
-                  height: 20,
-                ),
-              ],
-            ),
-          ],
+        child: SizedBox(
+          height: 100,
+          child: Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.2,
+                height: 60,
+                child: Image.network(item.icon),
+              ),
+
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.45,
+                height: 100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      title: item.name,
+                      fontSize: 'medium',
+                      isBold: true,
+                    ),
+                    const Gap(10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomText(
+                          title: '${item.recentPrice}',
+                          fontSize: 'medium',
+                          isBold: true,
+                        ),
+                        const Gap(10),
+                        Image.asset(
+                          'assets/images/골드.png',
+                          width: 20,
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ],
+                ), // 원하는 높이로 설정
+              ),
+              // 빈 공간을 추가하지 않음
+            ],
+          ),
         ),
       ),
     );

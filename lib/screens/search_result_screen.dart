@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:loa_market/models/api_data/post.dart';
+import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:loa_market/widgets/basic/global_appbar.dart';
 import 'package:loa_market/widgets/box/item_box.dart';
 
@@ -21,25 +23,34 @@ class SearchResultScreen extends StatefulWidget {
 class _SearchResultScreenState extends State<SearchResultScreen> {
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: true,
-      onPopInvokedWithResult: (didPop, result) {
-        widget.onBack();
-      },
+    return Material(
+      clipBehavior: Clip.antiAlias,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       child: Scaffold(
+        // FIXME: appbar 삭제하고 대체
         appBar: GlobalAppBar(toggleTheme: widget.toggleTheme),
-        body: GridView.builder(
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 2열로 설정
-            childAspectRatio: 1, // 비율 조정
-            crossAxisSpacing: 10, // 열 간격
-            mainAxisSpacing: 10, // 행 간격
+          child: Column(
+            children: [
+              CustomText(
+                title: '검색 결과',
+                fontSize: 'medium',
+                isBold: true,
+                color: 'black',
+              ),
+              const Gap(20),
+              Expanded(
+                  child: ListView.builder(
+                      itemCount: widget.items.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: ItemBox(item: widget.items[index]),
+                        );
+                      }))
+            ],
           ),
-          itemCount: widget.items.length,
-          itemBuilder: (context, index) {
-            return ItemBox(item: widget.items[index]);
-          },
         ),
       ),
     );

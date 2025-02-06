@@ -4,8 +4,13 @@ import 'package:loa_market/screens/search_result_screen.dart';
 import 'package:loa_market/service/api/post_items.dart';
 
 class Search extends StatefulWidget {
-  const Search({super.key, required this.toggleTheme});
+  const Search({
+    super.key,
+    required this.toggleTheme,
+    required this.onSearch,
+  });
   final void Function() toggleTheme;
+  final void Function(List<Item> items) onSearch;
 
   @override
   State<Search> createState() => _SearchState();
@@ -60,6 +65,7 @@ class _SearchState extends State<Search> {
       setState(() {
         items = itemResponse;
       });
+      widget.onSearch(items);
     } catch (e) {
       setState(() {});
     }
@@ -81,7 +87,8 @@ class _SearchState extends State<Search> {
             if (searchText.isNotEmpty) {
               //
               await fetchSearchItems(searchText);
-              navigateToSearchResultScreen(context, items);
+              widget.onSearch(items);
+              // navigateToSearchResultScreen(context, items);
             }
           },
           icon: const Icon(Icons.search),
