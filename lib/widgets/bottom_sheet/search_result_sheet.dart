@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:loa_market/models/api_data/post.dart';
+import 'package:loa_market/widgets/basic/appbar/bottom_sheet_appbar.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 
 import 'package:loa_market/widgets/box/item_box.dart';
@@ -29,18 +30,7 @@ class _SearchResultSheetState extends State<SearchResultSheet> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => Navigator.pop(context),
-            ),
-            title: const CustomText(
-              title: '검색 결과',
-              fontSize: 'medium',
-              isBold: true,
-            ),
-            centerTitle: true,
-          ),
+          const BottomSheetAppbar(title: '검색 결과'),
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
@@ -49,7 +39,7 @@ class _SearchResultSheetState extends State<SearchResultSheet> {
                       child: CustomText(
                         title: '검색 결과가 없습니다.',
                         fontSize: 'medium',
-                        color: 'black',
+                        isWhite: false,
                       ),
                     )
                   : ListView.builder(

@@ -6,11 +6,11 @@ class CustomText extends StatelessWidget {
       required this.title,
       required this.fontSize,
       this.isBold = false,
-      this.color = 'white'});
+      this.isWhite = true});
   final String title;
   final String fontSize;
   final bool isBold;
-  final String color;
+  final bool isWhite;
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +18,16 @@ class CustomText extends StatelessWidget {
       title,
       style: fontSize == 'large'
           ? Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: color == 'white' ? Colors.white : Colors.black,
+                color: isWhite ? Colors.white : Colors.black,
                 fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               )
           : fontSize == 'medium'
               ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: color == 'white' ? Colors.white : Colors.black,
+                    color: isWhite ? Colors.white : Colors.black,
                     fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                   )
               : Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: color == 'white' ? Colors.white : Colors.black,
+                    color: isWhite ? Colors.white : Colors.black,
                     fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                   ),
     );

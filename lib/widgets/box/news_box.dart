@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:loa_market/models/api_data/get.dart';
 import 'package:loa_market/service/service.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/bottom_sheet/news_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:loa_market/widgets/basic/progress.dart';
 
@@ -39,56 +40,52 @@ class _NewsBoxState extends State<NewsBox> {
     }
   }
 
+  void _showNewsSheet() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return NewsSheet(
+            newsList: newsList,
+            isLoading: isLoading,
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Theme.of(context).colorScheme.secondary,
-              width: 3,
-            ),
-          ),
-          child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: CustomText(
-                      title: '최근 로아 소식',
-                      fontSize: 'large',
-                      isBold: true,
-                    ),
-                  ),
-                  const Gap(20),
-                  if (isLoading) Progress(),
-                  if (!isLoading && newsList != null)
-                    SizedBox(
-                      height: 100,
-                      child: ListView.builder(
-                        itemCount: newsList!.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: InkWell(
-                              onTap: () {
-                                launchUrl(Uri.parse(newsList![index].link));
-                              },
-                              child: CustomText(
-                                title: newsList![index].title,
-                                fontSize: 'medium',
-                              ),
-                            ),
-                          );
-                        },
+      child: Material(
+        color: Theme.of(context).colorScheme.secondary,
+        borderRadius: BorderRadius.circular(10),
+        child: InkWell(
+          onTap: _showNewsSheet,
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.secondary,
+                  width: 3,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: CustomText(
+                          title: '최근 로아 소식',
+                          fontSize: 'large',
+                          isBold: true,
+                        ),
                       ),
-                    )
-                ],
-              ))),
+                    ],
+                  ))),
+        ),
+      ),
     );
   }
 }
