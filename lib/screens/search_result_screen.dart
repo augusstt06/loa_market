@@ -44,15 +44,24 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           Flexible(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: widget.items.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: ItemBox(item: widget.items[index]),
-                    );
-                  }),
+              child: widget.items.isEmpty
+                  ? const Center(
+                      child: CustomText(
+                        title: '검색 결과가 없습니다.',
+                        fontSize: 'medium',
+                        color: 'black',
+                      ),
+                    )
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: widget.items.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: ItemBox(item: widget.items[index]),
+                        );
+                      },
+                    ),
             ),
           ),
         ],
