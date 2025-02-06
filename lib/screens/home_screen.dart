@@ -32,9 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
           return SearchResultScreen(
             items: _searchResult,
             toggleTheme: widget.toggleTheme,
-            // onBack: () {
-            //   Navigator.pop(context);
-            // },
           );
         });
   }
@@ -56,15 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
           CrystalBox(),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: widget.toggleTheme,
-      //   backgroundColor: Colors.amber,
-      //   child: Icon(
-      //       Theme.of(context).brightness == Brightness.dark
-      //           ? Icons.sunny
-      //           : Icons.nightlight,
-      //       color: Colors.white),
-      // ),
     );
   }
 }
