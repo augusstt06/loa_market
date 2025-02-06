@@ -40,14 +40,14 @@ class _SearchState extends State<Search> {
         builder: (context) => SearchResultScreen(
           items: value,
           toggleTheme: widget.toggleTheme,
-          onBack: () {
-            // 뒤로가기 실행시 상태 초기화
-            setState(() {
-              searchText = '';
-              items = [];
-            });
-            _searchController.clear();
-          },
+          // onBack: () {
+          //   // 뒤로가기 실행시 상태 초기화
+          //   setState(() {
+          //     searchText = '';
+          //     items = [];
+          //   });
+          //   _searchController.clear();
+          // },
         ),
       ),
     ).then((_) {
@@ -87,7 +87,6 @@ class _SearchState extends State<Search> {
             if (searchText.isNotEmpty) {
               //
               await fetchSearchItems(searchText);
-              widget.onSearch(items);
               // navigateToSearchResultScreen(context, items);
             }
           },

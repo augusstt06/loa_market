@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+
 import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
-import 'package:loa_market/widgets/basic/global_appbar.dart';
+
 import 'package:loa_market/widgets/box/item_box.dart';
 
 class SearchResultScreen extends StatefulWidget {
@@ -10,11 +10,9 @@ class SearchResultScreen extends StatefulWidget {
     super.key,
     required this.items,
     required this.toggleTheme,
-    required this.onBack,
   });
   final void Function() toggleTheme;
   final List<Item> items;
-  final VoidCallback onBack;
 
   @override
   State<SearchResultScreen> createState() => _SearchResultScreenState();
@@ -23,35 +21,41 @@ class SearchResultScreen extends StatefulWidget {
 class _SearchResultScreenState extends State<SearchResultScreen> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      clipBehavior: Clip.antiAlias,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-      child: Scaffold(
-        // FIXME: appbar 삭제하고 대체
-        appBar: GlobalAppBar(toggleTheme: widget.toggleTheme),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          child: Column(
-            children: [
-              CustomText(
-                title: '검색 결과',
-                fontSize: 'medium',
-                isBold: true,
-                color: 'black',
-              ),
-              const Gap(20),
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: widget.items.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: ItemBox(item: widget.items[index]),
-                        );
-                      }))
-            ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () => Navigator.pop(context),
+            ),
+            title: const CustomText(
+              title: '검색 결과',
+              fontSize: 'medium',
+              isBold: true,
+            ),
+            centerTitle: true,
           ),
-        ),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: widget.items.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: ItemBox(item: widget.items[index]),
+                    );
+                  }),
+            ),
+          ),
+        ],
       ),
     );
   }

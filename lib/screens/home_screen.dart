@@ -26,14 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _searchResult = items;
     });
-    showDialog(
+    showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return Dialog(
-              child: SearchResultScreen(
-                  items: _searchResult,
-                  toggleTheme: widget.toggleTheme,
-                  onBack: Navigator.of(context).pop));
+          return SearchResultScreen(
+            items: _searchResult,
+            toggleTheme: widget.toggleTheme,
+            // onBack: () {
+            //   Navigator.pop(context);
+            // },
+          );
         });
   }
 
