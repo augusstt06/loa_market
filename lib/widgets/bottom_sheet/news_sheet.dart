@@ -19,6 +19,74 @@ class NewsSheet extends StatefulWidget {
 }
 
 class _NewsSheetState extends State<NewsSheet> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showScrollToTopButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    setState(() {
+      _showScrollToTopButton = _scrollController.offset >= 200;
+    });
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  Widget _buildNewsList() {
+    return ListView.separated(
+      controller: _scrollController,
+      physics: const ClampingScrollPhysics(),
+      itemCount: widget.newsList?.length ?? 0,
+      separatorBuilder: (context, index) => const Divider(),
+      itemBuilder: (context, index) {
+        final news = widget.newsList![index];
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+          child: InkWell(
+            onTap: () {
+              if (news.link != null) {
+                launchUrl(Uri.parse(news.link));
+              }
+            },
+            child: CustomText(
+              title: news.title ?? '제목 없음',
+              fontSize: 'medium',
+              isWhite: Theme.of(context).brightness == Brightness.dark,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildScrollToTopButton() {
+    return Positioned(
+      bottom: 16,
+      right: 16,
+      child: FloatingActionButton(
+        mini: true,
+        onPressed: _scrollToTop,
+        child: const Icon(Icons.arrow_upward),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,38 +99,17 @@ class _NewsSheetState extends State<NewsSheet> {
       ),
       child: widget.isLoading
           ? const Center(child: Progress())
-          : Column(
-              mainAxisSize: MainAxisSize.min,
+          : Stack(
               children: [
-                const BottomSheetAppbar(title: '로스트아크 소식'),
-                const Gap(15),
-                Expanded(
-                  child: ListView.separated(
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: widget.newsList?.length ?? 0,
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemBuilder: (context, index) {
-                      final news = widget.newsList![index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 20),
-                        child: InkWell(
-                          onTap: () {
-                            if (news.link != null) {
-                              launchUrl(Uri.parse(news.link));
-                            }
-                          },
-                          child: CustomText(
-                            title: news.title ?? '제목 없음',
-                            fontSize: 'medium',
-                            isWhite:
-                                Theme.of(context).brightness == Brightness.dark,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const BottomSheetAppbar(title: '로스트아크 소식'),
+                    const Gap(15),
+                    Expanded(child: _buildNewsList()),
+                  ],
                 ),
+                if (_showScrollToTopButton) _buildScrollToTopButton(),
               ],
             ),
     );
