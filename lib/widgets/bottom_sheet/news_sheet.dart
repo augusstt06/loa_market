@@ -45,7 +45,7 @@ class _NewsSheetState extends State<NewsSheet> {
                       final news = widget.newsList![index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 20),
+                            vertical: 8, horizontal: 20),
                         child: InkWell(
                           onTap: () {
                             if (news.link != null) {
@@ -55,7 +55,8 @@ class _NewsSheetState extends State<NewsSheet> {
                           child: CustomText(
                             title: news.title ?? '제목 없음',
                             fontSize: 'medium',
-                            isWhite: false,
+                            isWhite:
+                                Theme.of(context).brightness == Brightness.dark,
                           ),
                         ),
                       );

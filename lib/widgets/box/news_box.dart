@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:loa_market/models/api_data/get.dart';
 import 'package:loa_market/service/service.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:loa_market/widgets/bottom_sheet/news_sheet.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:loa_market/widgets/basic/progress.dart';
 
 class NewsBox extends StatefulWidget {
   const NewsBox({super.key});
