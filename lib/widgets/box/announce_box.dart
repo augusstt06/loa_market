@@ -26,19 +26,19 @@ class AnnounceBox extends StatelessWidget {
               Center(
                 child: CustomText(
                   title: '📌 개발 공지 📌',
-                  fontSize: 'large',
+                  fontSize: 25,
                   isBold: true,
                 ),
               ),
               const Gap(15),
               CustomText(
                 title: '별칭으로도 아이템 검색이 가능합니다.',
-                fontSize: 'medium',
+                fontSize: 20,
               ),
               const Gap(10),
               CustomText(
-                title: 'e.g. 숨결 검색시, 용암/빙하의 숨결과 태양의 가호/축복/은총이 함께 리스트업 됩니다.',
-                fontSize: 'medium',
+                title: 'e.g. 숨결 검색 => 용암/빙하의 숨결,태양의 가호/축복/은총 리스트업.',
+                fontSize: 20,
               ),
             ],
           ),

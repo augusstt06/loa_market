@@ -8,7 +8,7 @@ class CustomText extends StatelessWidget {
       this.isBold = false,
       this.isWhite = true});
   final String title;
-  final String fontSize;
+  final double fontSize;
   final bool isBold;
   final bool isWhite;
 
@@ -16,20 +16,11 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: fontSize == 'large'
-          ? Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: isWhite ? Colors.white : Colors.black,
-                fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-              )
-          : fontSize == 'medium'
-              ? Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: isWhite ? Colors.white : Colors.black,
-                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                  )
-              : Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: isWhite ? Colors.white : Colors.black,
-                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                  ),
+      style: TextStyle(
+        fontSize: fontSize,
+        color: isWhite ? Colors.white : Colors.black,
+        fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+      ),
     );
   }
 }

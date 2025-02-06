@@ -38,7 +38,7 @@ class _SearchResultSheetState extends State<SearchResultSheet> {
                   ? const Center(
                       child: CustomText(
                         title: '검색 결과가 없습니다.',
-                        fontSize: 'medium',
+                        fontSize: 18,
                         isWhite: false,
                       ),
                     )

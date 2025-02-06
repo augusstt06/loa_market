@@ -26,7 +26,6 @@ class ItemBox extends StatelessWidget {
                 height: 60,
                 child: Image.network(item.icon),
               ),
-
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.45,
                 height: 100,
@@ -35,7 +34,7 @@ class ItemBox extends StatelessWidget {
                   children: [
                     CustomText(
                       title: item.name,
-                      fontSize: 'medium',
+                      fontSize: 17,
                       isBold: true,
                     ),
                     const Gap(10),
@@ -44,21 +43,20 @@ class ItemBox extends StatelessWidget {
                       children: [
                         CustomText(
                           title: addComma(item.recentPrice),
-                          fontSize: 'medium',
+                          fontSize: 20,
                           isBold: true,
                         ),
                         const Gap(10),
                         Image.asset(
                           'assets/images/골드.png',
-                          width: 20,
-                          height: 20,
+                          width: 25,
+                          height: 25,
                         ),
                       ],
                     ),
                   ],
-                ), // 원하는 높이로 설정
+                ),
               ),
-              // 빈 공간을 추가하지 않음
             ],
           ),
         ),

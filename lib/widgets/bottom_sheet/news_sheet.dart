@@ -66,7 +66,7 @@ class _NewsSheetState extends State<NewsSheet> {
             },
             child: CustomText(
               title: news.title ?? '제목 없음',
-              fontSize: 'medium',
+              fontSize: 18,
               isWhite: Theme.of(context).brightness == Brightness.dark,
             ),
           ),

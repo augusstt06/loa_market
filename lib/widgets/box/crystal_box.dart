@@ -74,8 +74,7 @@ class _CrystalBoxState extends State<CrystalBox> {
                 ? Progress()
                 : Column(
                     children: [
-                      CustomText(
-                          title: '크리스탈 시세', fontSize: 'large', isBold: true),
+                      CustomText(title: '크리스탈 시세', fontSize: 25, isBold: true),
                       const Gap(20),
                       if (crystalInfo != null)
                         buildPriceRow('판매가', crystalInfo?.sell ?? ''),
@@ -93,7 +92,7 @@ class _CrystalBoxState extends State<CrystalBox> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        CustomText(title: title, fontSize: 'large'),
+        CustomText(title: title, fontSize: 23),
         Container(
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.secondary,
@@ -101,7 +100,7 @@ class _CrystalBoxState extends State<CrystalBox> {
           ),
           child: Row(
             children: [
-              CustomText(title: '$price', fontSize: 'large'),
+              CustomText(title: '$price', fontSize: 23),
               const Gap(10),
               Image.asset(
                 'assets/images/골드.png',
