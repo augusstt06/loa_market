@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/models/api_data/post.dart';
+import 'package:loa_market/service/service.dart';
 import 'package:loa_market/widgets/bottom_sheet/search_result_sheet.dart';
 import 'package:loa_market/widgets/basic/appbar/global_appbar.dart';
 import 'package:loa_market/widgets/box/announce_box.dart';
@@ -52,6 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
             const AnnounceBox(),
             NewsBox(),
             CrystalBox(),
+            ElevatedButton(
+              onPressed: () {
+                FirebaseTest().addTest();
+              },
+              child: Text('Firebase 테스트'),
+            )
           ],
         ),
       ),
