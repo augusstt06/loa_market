@@ -52,6 +52,10 @@ class _SearchState extends State<Search> {
 
   Future<void> fetchSearchItems(String itemName) async {
     try {
+      setState(() {
+        searchText = '';
+        items = [];
+      });
       final ResponseItemList itemResponse = await fetchItems(itemName);
 
       setState(() {
