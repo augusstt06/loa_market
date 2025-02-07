@@ -1,7 +1,7 @@
 import '../../constant/constant.dart';
 
 String getItemCode(String itemName) {
-  if (itemClassification(itemName) == 'reinforce') {
+  if (itemClassification(itemName) == REINFORCE) {
     return reinforceCode;
   }
   return engraveCode;
@@ -9,12 +9,11 @@ String getItemCode(String itemName) {
 
 String itemClassification(String itemName) {
   if (itemKeyword.any((item) => itemName.contains(item))) {
-    return 'reinforce';
+    return REINFORCE;
   }
-  return 'engrave';
+  return ENGRAVE;
 }
 
-// 아이템 별명
 List<String> convertItemNickname(String itemName) {
   switch (itemName) {
     case '명파':
