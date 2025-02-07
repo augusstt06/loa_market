@@ -1,6 +1,5 @@
 import '../../constant/constant.dart';
 
-// 우선 러프하게 이런 기능이다~정도만 구현 -> 수정예정
 String getItemCode(String itemName) {
   if (itemClassification(itemName) == 'reinforce') {
     return reinforceCode;
@@ -9,17 +8,7 @@ String getItemCode(String itemName) {
 }
 
 String itemClassification(String itemName) {
-  if (itemName.contains('오레하') ||
-      itemName.contains('아비도스') ||
-      itemName.contains('숨결') ||
-      itemName.contains('가호') ||
-      itemName.contains('은총') ||
-      itemName.contains('축복') ||
-      itemName.contains('파괴') ||
-      itemName.contains('수호') ||
-      itemName.contains('에스더') ||
-      itemName.contains('기운') ||
-      itemName.contains('파편')) {
+  if (itemKeyword.any((item) => itemName.contains(item))) {
     return 'reinforce';
   }
   return 'engrave';
@@ -44,6 +33,38 @@ List<String> convertItemNickname(String itemName) {
       return ['저주받은 인형'];
     case '마흐':
       return ['마나의 흐름'];
+    case '결대':
+      return ['결투의 대가'];
+    case '구동':
+      return ['구슬동자'];
+    case '급타':
+      return ['급소 타격'];
+    case '달저':
+      return ['달인의 저력'];
+    case '돌대':
+      return ['돌격대장'];
+    case '속속':
+      return ['속전속결'];
+    case '안상':
+      return ['안정된 상태'];
+    case '에포':
+      return ['에테르 포식자'];
+    case '예둔':
+      return ['예리한 둔기'];
+    case '위모':
+      return ['위기 모면'];
+    case '정흡':
+      return ['정기 흡수'];
+    case '정단':
+      return ['정밀 단도'];
+    case '질증':
+      return ['질량 증가'];
+    case '최마증':
+      return ['최대 마나 증가'];
+    case '타대':
+      return ['타격의 대가'];
+    case '폭전':
+      return ['폭발물 전문가'];
     default:
       return [itemName];
   }
