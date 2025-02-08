@@ -13,7 +13,7 @@ const List<String> itemKeyword = [
   '돌파',
 ];
 
-const List<String> trackedItemList = [
+const List<String> trackedReinforceItemList = [
   // 재련재료
   '파괴석 결정',
   '파괴강석',
@@ -41,7 +41,10 @@ const List<String> trackedItemList = [
   '태양의 가호',
   '용암의 숨결',
   '빙하의 숨결',
+  '에스더의 기운',
+];
 
+const List<String> trackedEngraveItemList = [
   // 각인서
   '각성',
   '강령술',
