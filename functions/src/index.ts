@@ -68,6 +68,7 @@ exports.recordDailyPrices = onSchedule(
           apiEndpoint.value(),
           {
             CategoryCode: 40000,
+            ItemGrade: "유물",
             ItemName: "",
             PageNo: page,
             SortCondition: "ASC",
