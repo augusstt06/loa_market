@@ -1,4 +1,6 @@
 // 요금제 업그레이드 후 firebase deploy --only functions 입력
+// 테스트: firebase emulators:start -> firebase functions:shell -> recordDailyPrices() 입력
+// 코드 수정 후에는 npm run build 재입력
 
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { defineString } from "firebase-functions/params";
@@ -35,6 +37,7 @@ exports.recordDailyPrices = onSchedule(
     const batch = db.batch();
 
     try {
+      console.log("Starting to fetch reinforce items...");
       // 재련 재료 데이터 가져오기
       const reinforceItems: LostArkItem[] = [];
       for (const keyword of reinforceKeywords) {
@@ -53,9 +56,15 @@ exports.recordDailyPrices = onSchedule(
             },
           }
         );
+        console.log(`Found ${response.data.Items.length} items for ${keyword}`);
+        response.data.Items.forEach((item) => {
+          console.log(
+            `Item: ${item.Name}, Price: ${item.CurrentMinPrice}, Grade: ${item.Grade}`
+          );
+        });
         reinforceItems.push(...response.data.Items);
       }
-
+      console.log("Starting to fetch engrave items...");
       // 각인서 데이터 가져오기 (1-10 페이지)
       const engraveItems: LostArkItem[] = [];
       for (let page = 1; page <= 10; page++) {
@@ -75,6 +84,12 @@ exports.recordDailyPrices = onSchedule(
             },
           }
         );
+        console.log(`Found ${response.data.Items.length} items for engrave`);
+        response.data.Items.forEach((item) => {
+          console.log(
+            `Item: ${item.Name}, Price: ${item.CurrentMinPrice}, Grade: ${item.Grade}`
+          );
+        });
         engraveItems.push(...response.data.Items);
       }
 
@@ -82,15 +97,41 @@ exports.recordDailyPrices = onSchedule(
 
       // 가격 기록
       for (const item of allItems) {
-        const doc = db.collection("price_history").doc();
-        batch.set(doc, {
-          itemId: item.Id,
-          itemName: item.Name,
-          grade: item.Grade,
-          yDayAvgPrice: item.YDayAvgPrice,
-          currentMinPrice: item.CurrentMinPrice,
-          timestamp: admin.firestore.FieldValue.serverTimestamp(),
-        });
+        const today = new Date();
+        const formattedDate = `${today.getFullYear()}.${String(
+          today.getMonth() + 1
+        ).padStart(2, "0")}.${String(today.getDate()).padStart(2, "0")}`;
+
+        const itemDoc = db.collection("items").doc(item.Name);
+        const existingDoc = await itemDoc.get();
+
+        // 이미 오늘 기록이 있는지 확인
+        if (
+          existingDoc.exists &&
+          existingDoc.data()?.priceHistory?.[formattedDate]
+        ) {
+          console.log(
+            `There is already a price record for ${item.Name} on ${formattedDate}`
+          );
+          continue;
+        }
+
+        batch.set(
+          itemDoc,
+          {
+            Id: item.Id,
+            Name: item.Name,
+            Grade: item.Grade,
+            lastUpdated: formattedDate,
+            priceHistory: {
+              [formattedDate]: {
+                YDayAvgPrice: item.YDayAvgPrice,
+                CurrentMinPrice: item.CurrentMinPrice,
+              },
+            },
+          },
+          { merge: true }
+        );
       }
 
       await batch.commit();
