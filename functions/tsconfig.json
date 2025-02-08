@@ -6,12 +6,10 @@
     "outDir": "lib",
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2017",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "compileOnSave": true,
-  "include": ["src"],
-  "parserOptions": {
-    "project": ["tsconfig.json"],
-    "createDefaultProgram": true
-  }
+  "include": ["src"]
 }

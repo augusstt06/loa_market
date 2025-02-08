@@ -1,22 +1,26 @@
+// 요금제 업그레이드 후 firebase deploy --only functions 입력
+
+import { onSchedule } from "firebase-functions/v2/scheduler";
 import { defineString } from "firebase-functions/params";
 import * as admin from "firebase-admin";
-import * as axios from "axios";
-import { onSchedule } from "firebase-functions/scheduler";
+import axios from "axios";
 
-admin.initializeApp();
 interface LostArkItem {
   Id: number;
   Name: string;
   Grade: string;
   YDayAvgPrice: number;
+  CurrentMinPrice: number;
 }
 
 interface LostArkResponse {
   Items: LostArkItem[];
 }
 
+admin.initializeApp();
+
 const apiKey = defineString("LOA_API_KEY");
-const apiEndPoint = defineString("LOA_POST_ITEM_API_ENDPOINT");
+const apiEndpoint = defineString("LOA_POST_ITEM_API_ENDPOINT");
 
 const reinforceKeywords = ["파괴", "수호", "돌파", "파편", "융화", "에스더"];
 
@@ -26,7 +30,7 @@ exports.recordDailyPrices = onSchedule(
     timeZone: "Asia/Seoul",
     region: "asia-northeast3",
   },
-  async (context) => {
+  async () => {
     const db = admin.firestore();
     const batch = db.batch();
 
@@ -35,7 +39,7 @@ exports.recordDailyPrices = onSchedule(
       const reinforceItems: LostArkItem[] = [];
       for (const keyword of reinforceKeywords) {
         const response = await axios.post<LostArkResponse>(
-          apiEndPoint.value(),
+          apiEndpoint.value(),
           {
             CategoryCode: 50000,
             ItemName: keyword,
@@ -52,11 +56,11 @@ exports.recordDailyPrices = onSchedule(
         reinforceItems.push(...response.data.Items);
       }
 
-      // 각인서 데이터 가져오기
+      // 각인서 데이터 가져오기 (1-10 페이지)
       const engraveItems: LostArkItem[] = [];
       for (let page = 1; page <= 10; page++) {
         const response = await axios.post<LostArkResponse>(
-          apiEndPoint.value(),
+          apiEndpoint.value(),
           {
             CategoryCode: 40000,
             ItemName: "",
@@ -80,10 +84,11 @@ exports.recordDailyPrices = onSchedule(
       for (const item of allItems) {
         const doc = db.collection("price_history").doc();
         batch.set(doc, {
-          Id: item.Id,
-          Name: item.Name,
-          Grade: item.Grade,
-          YDayAvgPrice: item.YDayAvgPrice,
+          itemId: item.Id,
+          itemName: item.Name,
+          grade: item.Grade,
+          yDayAvgPrice: item.YDayAvgPrice,
+          currentMinPrice: item.CurrentMinPrice,
           timestamp: admin.firestore.FieldValue.serverTimestamp(),
         });
       }
