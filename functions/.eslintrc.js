@@ -30,5 +30,6 @@ module.exports = {
     "@typescript-eslint/object-curly-spacing": "off",
     "import/no-unresolved": "off",
     "@typescript-eslint/quotes": ["error", "double"],
+    "max-len": "off",
   },
 };
