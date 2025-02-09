@@ -4,6 +4,7 @@ import 'package:loa_market/constant/constant.dart';
 import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/utils/utils.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/dialog/item_graph_dialog.dart';
 
 class ItemBox extends StatelessWidget {
   const ItemBox({super.key, required this.item});
@@ -78,7 +79,14 @@ class ItemBox extends StatelessWidget {
               _showPriceHistoryButton
                   ? Expanded(
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ItemGraphDialog(
+                              itemName: item.name,
+                            ),
+                          );
+                        },
                         icon: const Icon(
                           Icons.bar_chart,
                           color: Colors.white,
