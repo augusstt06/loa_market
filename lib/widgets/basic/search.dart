@@ -34,13 +34,12 @@ class _SearchState extends State<Search> {
 
   void navigateToSearchResultScreen(
       BuildContext context, ResponseItemList value) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SearchResultSheet(
-          items: value,
-          toggleTheme: widget.toggleTheme,
-        ),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => SearchResultSheet(
+        items: value,
+        toggleTheme: widget.toggleTheme,
       ),
     ).then((_) {
       setState(() {
@@ -52,6 +51,10 @@ class _SearchState extends State<Search> {
 
   Future<void> fetchSearchItems(String itemName) async {
     try {
+      setState(() {
+        searchText = '';
+        items = [];
+      });
       final ResponseItemList itemResponse = await fetchItems(itemName);
 
       setState(() {

@@ -1,4 +1,50 @@
-# Loa Market
+# LoAuction
+
+## Overview
+
+📌 When building the project for the first time, it takes some time due to firebase integration.
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/augusstt06/loa_market.git
+cd loa-market
+```
+
+2. Install dependencies
+
+```bash
+flutter pub get
+```
+
+3. Run the app
+
+```bash
+flutter run
+```
+
+📌 Test Firebase
+
+```bash
+# In root directory
+cd functions
+
+# Install dependencies
+npm install
+
+# firebase emulator start
+firebase emulators:start
+
+# Open firebase functions shell in new terminal
+firebase functions:shell
+
+# Function execution
+recordDailyPrices()
+```
+
+## Features
 
 An app that allows you to easily check the prices of items from the Lost Ark auction through the app.
 
@@ -20,20 +66,22 @@ Below are examples of items that meet the conditions:
 
 The first screen displayed when entering the app.
 
-- **Notice Widget (공지사항)**
+<img src="./assets/readme/home.png" alt="Home" width="300"/>
 
-  - Notice from Lost Ark public homepage.
-  - Show the 3 most recent notice tabs, moves to the public homepage when clicked.
+- **Search Widget (검색창)**
+
+  - Search Widget to search for items.
+  - When searching, move to a screen that shows items matching the search term.
 
 - **Development Announcement Widget (개발 공지)**
 
   - Announcements that occur while developing the app.
   - Display briefly in the center of the screen.
 
-- **Search Widget (검색창)**
+- **Notice Widget (공지사항)**
 
-  - Search Widget to search for items.
-  - When searching, move to a screen that shows items matching the search term.
+  - Notice from Lost Ark public homepage.
+  - Show the 3 most recent notice tabs, moves to the public homepage when clicked.
 
 - **Crystal Price Widget (크리스탈 가격)**
   - Shows the current crystal price.
@@ -43,6 +91,8 @@ The first screen displayed when entering the app.
 
 When searching, a screen that lists items that match the search term.
 
+<img src="./assets/readme/search_result.png" alt="Search Result" width="300"/>
+
 - **Item List Widget (아이템 목록)**
 
   - List items that match the search term.
@@ -50,18 +100,21 @@ When searching, a screen that lists items that match the search term.
     > e.g "숨결" 검색시 용암/빙하의 숨결 이외, 태양의 축복, 은총, 가호 리스트업.
   - When clicked on item, go to item detail screen.
 
-- **Item Detail Widget (아이템 상세)**
-  - Shows the details of the item.
-  - When clicked, move to a screen that shows the details of the item.
+- **Item Price History Graph Widget (아이템 시세 그래프)**
+  - Shows the price history of the item.
+  - When clicked, a price graph pop-up for the item opens.
+    > Graphs are provided only for high demand items.
 
-### 3. Item Detail
+### 3. Graph Pop-up
 
-When clicked on item, a screen that shows the details of the item.
+It shows the market price trend for the item.
+
+<img src="./assets/readme/graph.png" alt="Graph" width="300"/>
 
 - **Info Widget (정보)**
-  - Shows the details of the item.
-    - Item name, current price.
-  - Show a graph of the item price for the most recent month.
+
+  - Currently, there is not much data in the database, so daily price changes are displayed.
+  - In the future, we plan to display data at weekly intervals.
 
 ## API
 

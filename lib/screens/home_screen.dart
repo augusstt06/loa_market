@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/models/api_data/post.dart';
+
 import 'package:loa_market/widgets/bottom_sheet/search_result_sheet.dart';
 import 'package:loa_market/widgets/basic/appbar/global_appbar.dart';
 import 'package:loa_market/widgets/box/announce_box.dart';
@@ -39,19 +40,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: GlobalAppBar(toggleTheme: widget.toggleTheme),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Search(
-                toggleTheme: widget.toggleTheme,
-                onSearch: _showSearchResultDialog),
-          ),
-          const AnnounceBox(),
-          NewsBox(),
-          CrystalBox(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Search(
+                  toggleTheme: widget.toggleTheme,
+                  onSearch: _showSearchResultDialog),
+            ),
+            const AnnounceBox(),
+            NewsBox(),
+            CrystalBox(),
+          ],
+        ),
       ),
     );
   }

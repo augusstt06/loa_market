@@ -31,6 +31,7 @@ class AppTheme {
     colorScheme: ColorScheme.dark(
       primary: Colors.indigo,
       secondary: Colors.indigo[700]!,
+      surface: Colors.grey.shade900,
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.indigo[700]!,

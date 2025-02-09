@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:loa_market/constant/constant.dart';
 import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/utils/utils.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/dialog/item_graph_dialog.dart';
 
 class ItemBox extends StatelessWidget {
   const ItemBox({super.key, required this.item});
   final Item item;
+
+  bool get _showPriceHistoryButton {
+    if (item.name.endsWith('각인서') && item.grade == '유물') {
+      final engraveName = item.name.replaceAll('각인서', '').trim();
+      return trackedEngraveItemList.contains(engraveName);
+    } else if (item.name.contains('주머니')) {
+      final reinforceName = item.name.split('주머니')[0].trim();
+      return trackedReinforceItemList.contains(reinforceName);
+    }
+    return trackedReinforceItemList.contains(item.name);
+  }
+
+  bool get isEngraveItem {
+    return item.name.endsWith('각인서');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +43,6 @@ class ItemBox extends StatelessWidget {
                 height: 60,
                 child: Image.network(item.icon),
               ),
-
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.45,
                 height: 100,
@@ -34,8 +50,10 @@ class ItemBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
-                      title: item.name,
-                      fontSize: 'medium',
+                      title: isEngraveItem
+                          ? '${item.grade} ${item.name.replaceAll('각인서', '').trim()}'
+                          : item.name,
+                      fontSize: 17,
                       isBold: true,
                     ),
                     const Gap(10),
@@ -44,21 +62,39 @@ class ItemBox extends StatelessWidget {
                       children: [
                         CustomText(
                           title: addComma(item.recentPrice),
-                          fontSize: 'medium',
+                          fontSize: 20,
                           isBold: true,
                         ),
                         const Gap(10),
                         Image.asset(
                           'assets/images/골드.png',
-                          width: 20,
-                          height: 20,
+                          width: 25,
+                          height: 25,
                         ),
                       ],
                     ),
                   ],
-                ), // 원하는 높이로 설정
+                ),
               ),
-              // 빈 공간을 추가하지 않음
+              _showPriceHistoryButton
+                  ? Expanded(
+                      child: IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ItemGraphDialog(
+                              itemName: item.name,
+                            ),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.bar_chart,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),

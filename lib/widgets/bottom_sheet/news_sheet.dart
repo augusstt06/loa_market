@@ -53,7 +53,9 @@ class _NewsSheetState extends State<NewsSheet> {
       controller: _scrollController,
       physics: const ClampingScrollPhysics(),
       itemCount: widget.newsList?.length ?? 0,
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) => const Divider(
+        color: Colors.grey,
+      ),
       itemBuilder: (context, index) {
         final news = widget.newsList![index];
         return Padding(
@@ -66,7 +68,7 @@ class _NewsSheetState extends State<NewsSheet> {
             },
             child: CustomText(
               title: news.title ?? '제목 없음',
-              fontSize: 'medium',
+              fontSize: 18,
               isWhite: Theme.of(context).brightness == Brightness.dark,
             ),
           ),
@@ -98,7 +100,10 @@ class _NewsSheetState extends State<NewsSheet> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: widget.isLoading
-          ? const Center(child: Progress())
+          ? const Center(
+              child: Progress(
+              isWhite: true,
+            ))
           : Stack(
               children: [
                 Column(

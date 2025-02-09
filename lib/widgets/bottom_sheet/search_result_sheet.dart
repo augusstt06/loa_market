@@ -23,6 +23,7 @@ class _SearchResultSheetState extends State<SearchResultSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * 0.9,
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
@@ -33,13 +34,14 @@ class _SearchResultSheetState extends State<SearchResultSheet> {
           const BottomSheetAppbar(title: '검색 결과'),
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               child: widget.items.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: CustomText(
                         title: '검색 결과가 없습니다.',
-                        fontSize: 'medium',
-                        isWhite: false,
+                        fontSize: 20,
+                        isWhite:
+                            Theme.of(context).brightness == Brightness.dark,
                       ),
                     )
                   : ListView.builder(

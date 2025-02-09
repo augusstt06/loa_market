@@ -14,7 +14,7 @@ class BottomSheetAppbar extends StatelessWidget {
       ),
       title: CustomText(
         title: title,
-        fontSize: 'large',
+        fontSize: 18,
         isBold: true,
       ),
       centerTitle: true,

@@ -75,7 +75,7 @@ class _NewsBoxState extends State<NewsBox> {
                       Center(
                         child: CustomText(
                           title: '최근 로아 소식',
-                          fontSize: 'large',
+                          fontSize: 22,
                           isBold: true,
                         ),
                       ),
