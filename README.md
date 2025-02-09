@@ -1,5 +1,51 @@
 # Loa Market
 
+## Overview
+
+📌 When building the project for the first time, it takes some time due to firebase integration.
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/augusstt06/loa_market.git
+cd loa-market
+```
+
+2. Install dependencies
+
+```bash
+flutter pub get
+```
+
+3. Run the app
+
+```bash
+flutter run
+```
+
+📌 Test Firebase
+
+```bash
+# In root directory
+cd functions
+
+# Install dependencies
+npm install
+
+# firebase emulator start
+firebase emulators:start
+
+# Open firebase functions shell
+firebase functions:shell
+
+# Function execution
+recordDailyPrices()
+```
+
+## Features
+
 An app that allows you to easily check the prices of items from the Lost Ark auction through the app.
 
 First of all, this project plans to give priority to searching for goods needed for character development.
