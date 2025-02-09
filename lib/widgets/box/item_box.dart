@@ -13,6 +13,9 @@ class ItemBox extends StatelessWidget {
     if (item.name.endsWith('각인서') && item.grade == '유물') {
       final engraveName = item.name.replaceAll('각인서', '').trim();
       return trackedEngraveItemList.contains(engraveName);
+    } else if (item.name.contains('주머니')) {
+      final reinforceName = item.name.split('주머니')[0].trim();
+      return trackedReinforceItemList.contains(reinforceName);
     }
     return trackedReinforceItemList.contains(item.name);
   }
