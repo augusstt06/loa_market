@@ -12,7 +12,11 @@ class GlobalAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: CustomText(title: 'LOA Market', fontSize: 20),
+      title: CustomText(
+        title: 'LoAuction',
+        fontSize: 25,
+        isBold: true,
+      ),
       leading: IconButton(
         onPressed: toggleTheme,
         icon: Icon(
