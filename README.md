@@ -37,7 +37,7 @@ npm install
 # firebase emulator start
 firebase emulators:start
 
-# Open firebase functions shell
+# Open firebase functions shell in new terminal
 firebase functions:shell
 
 # Function execution
