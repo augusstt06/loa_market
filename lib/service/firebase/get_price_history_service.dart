@@ -12,7 +12,7 @@ class GetPriceHistoryService {
 
       if (snapshot.docs.isNotEmpty) {
         final data = snapshot.docs.first.data();
-        return Map<String, Map<String, dynamic>>.from(data['priceHistory']);
+        return data['priceHistory'] as Map<String, dynamic>?;
       }
       return null;
     } catch (e) {
