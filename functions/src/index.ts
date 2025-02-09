@@ -20,7 +20,16 @@ admin.initializeApp();
 const apiKey = defineString("LOA_API_KEY");
 const apiEndpoint = defineString("LOA_POST_ITEM_API_ENDPOINT");
 
-const reinforceKeywords = ["파괴", "수호", "돌파", "파편", "융화", "에스더"];
+const reinforceKeywords = [
+  "파괴",
+  "수호",
+  "돌파",
+  "파편",
+  "융화",
+  "에스더",
+  "숨결",
+  "태양",
+];
 
 exports.recordDailyPrices = onSchedule(
   {
