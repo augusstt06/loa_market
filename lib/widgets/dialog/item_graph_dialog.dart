@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../service/service.dart';
+
 class ItemGraphDialog extends StatefulWidget {
   const ItemGraphDialog({super.key, required this.itemName});
   final String itemName;
@@ -9,6 +11,32 @@ class ItemGraphDialog extends StatefulWidget {
 }
 
 class _ItemGraphDialogState extends State<ItemGraphDialog> {
+  final GetPriceHistoryService _itemService = GetPriceHistoryService();
+  bool isLoading = true;
+  Map<String, dynamic>? priceHistory;
+
+  Future<void> _fetchItemPriceHistory() async {
+    try {
+      final data = await _itemService.getItemPriceHistory(widget.itemName);
+      setState(() {
+        priceHistory = data;
+        isLoading = false;
+      });
+      print('priceHistory: $priceHistory');
+    } catch (e) {
+      print('Error fetching price history: $e');
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchItemPriceHistory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
