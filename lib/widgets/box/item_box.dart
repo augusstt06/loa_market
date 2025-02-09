@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:loa_market/constant/constant.dart';
 import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/utils/utils.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
@@ -7,6 +8,18 @@ import 'package:loa_market/widgets/basic/custom_text.dart';
 class ItemBox extends StatelessWidget {
   const ItemBox({super.key, required this.item});
   final Item item;
+
+  bool get _showPriceHistoryButton {
+    if (item.name.endsWith('각인서') && item.grade == '유물') {
+      final engraveName = item.name.replaceAll('각인서', '').trim();
+      return trackedEngraveItemList.contains(engraveName);
+    }
+    return trackedReinforceItemList.contains(item.name);
+  }
+
+  bool get isEngraveItem {
+    return item.name.endsWith('각인서');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +46,9 @@ class ItemBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
-                      title: item.name,
+                      title: isEngraveItem
+                          ? '${item.grade} ${item.name.replaceAll('각인서', '').trim()}'
+                          : item.name,
                       fontSize: 17,
                       isBold: true,
                     ),
@@ -57,6 +72,18 @@ class ItemBox extends StatelessWidget {
                   ],
                 ),
               ),
+              _showPriceHistoryButton
+                  ? Expanded(
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.bar_chart,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),

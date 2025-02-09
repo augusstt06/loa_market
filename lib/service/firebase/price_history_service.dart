@@ -31,8 +31,6 @@ class PriceHistoryService {
           'CurrentMinPrice': matchingItem.currentMinPrice,
           'Timestamp': FieldValue.serverTimestamp(),
         });
-
-        print('기록된 아이템: ${matchingItem.name}');
       }
     }
   }
@@ -49,9 +47,7 @@ class PriceHistoryService {
           responseItems, trackedEngraveItemList, batch, collection);
 
       await batch.commit();
-      print('모든 추적 아이템의 가격이 기록되었습니다.');
     } catch (e) {
-      print('가격 기록 중 오류 발생: $e');
       rethrow;
     }
   }
