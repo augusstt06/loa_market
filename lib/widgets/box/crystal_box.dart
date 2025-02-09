@@ -71,7 +71,9 @@ class _CrystalBoxState extends State<CrystalBox> {
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: SizedBox(
             child: isLoading
-                ? Progress()
+                ? Progress(
+                    isWhite: true,
+                  )
                 : Column(
                     children: [
                       CustomText(title: '크리스탈 시세', fontSize: 25, isBold: true),

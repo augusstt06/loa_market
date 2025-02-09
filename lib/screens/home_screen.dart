@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loa_market/models/api_data/post.dart';
+
 import 'package:loa_market/widgets/bottom_sheet/search_result_sheet.dart';
 import 'package:loa_market/widgets/basic/appbar/global_appbar.dart';
 import 'package:loa_market/widgets/box/announce_box.dart';

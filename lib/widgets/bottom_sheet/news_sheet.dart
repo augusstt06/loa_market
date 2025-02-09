@@ -98,7 +98,10 @@ class _NewsSheetState extends State<NewsSheet> {
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: widget.isLoading
-          ? const Center(child: Progress())
+          ? const Center(
+              child: Progress(
+              isWhite: true,
+            ))
           : Stack(
               children: [
                 Column(

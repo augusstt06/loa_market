@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:loa_market/constant/constant.dart';
 import 'package:loa_market/models/api_data/post.dart';
 import 'package:loa_market/utils/utils.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/dialog/item_graph_dialog.dart';
 
 class ItemBox extends StatelessWidget {
   const ItemBox({super.key, required this.item});
   final Item item;
+
+  bool get _showPriceHistoryButton {
+    if (item.name.endsWith('각인서') && item.grade == '유물') {
+      final engraveName = item.name.replaceAll('각인서', '').trim();
+      return trackedEngraveItemList.contains(engraveName);
+    } else if (item.name.contains('주머니')) {
+      final reinforceName = item.name.split('주머니')[0].trim();
+      return trackedReinforceItemList.contains(reinforceName);
+    }
+    return trackedReinforceItemList.contains(item.name);
+  }
+
+  bool get isEngraveItem {
+    return item.name.endsWith('각인서');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +50,9 @@ class ItemBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
-                      title: item.name,
+                      title: isEngraveItem
+                          ? '${item.grade} ${item.name.replaceAll('각인서', '').trim()}'
+                          : item.name,
                       fontSize: 17,
                       isBold: true,
                     ),
@@ -57,6 +76,25 @@ class ItemBox extends StatelessWidget {
                   ],
                 ),
               ),
+              _showPriceHistoryButton
+                  ? Expanded(
+                      child: IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ItemGraphDialog(
+                              itemName: item.name,
+                            ),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.bar_chart,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),

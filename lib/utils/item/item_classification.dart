@@ -16,6 +16,10 @@ String itemClassification(String itemName) {
 
 List<String> convertItemNickname(String itemName) {
   switch (itemName) {
+    case '파강':
+      return ['파괴'];
+    case '수강':
+      return ['수호'];
     case '명파':
       return ['명예의 파편', '운명의 파편'];
     case '운파':
@@ -28,6 +32,8 @@ List<String> convertItemNickname(String itemName) {
       return ['경이로운 명예의 돌파석'];
     case '찬명돌':
       return ['찬란한 명예의 돌파석'];
+    case '운명돌' || '운돌':
+      return ['운명의 돌파석'];
     case '저받':
       return ['저주받은 인형'];
     case '마흐':
@@ -42,10 +48,22 @@ List<String> convertItemNickname(String itemName) {
       return ['달인의 저력'];
     case '돌대':
       return ['돌격대장'];
+    case '마효증':
+      return ['마나 효율 증가'];
+    case '부뼈':
+      return ['부러진 뼈'];
+    case '선필':
+      return ['선수필승'];
     case '속속':
       return ['속전속결'];
+    case '슈차':
+      return ['슈퍼차지'];
+    case '시집':
+      return ['시선 집중'];
     case '안상':
       return ['안정된 상태'];
+    case '약무':
+      return ['약자 무시'];
     case '에포':
       return ['에테르 포식자'];
     case '예둔':

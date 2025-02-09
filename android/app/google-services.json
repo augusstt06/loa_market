@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "915731393585",
+    "project_id": "loa-market-b8562",
+    "storage_bucket": "loa-market-b8562.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915731393585:android:d1a4581549f56b425ff910",
+        "android_client_info": {
+          "package_name": "com.example.loa_market"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDay7b5nj7OKwChQayyDhuNX3OlssHAe08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
