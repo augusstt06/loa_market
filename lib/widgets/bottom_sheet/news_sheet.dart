@@ -53,7 +53,9 @@ class _NewsSheetState extends State<NewsSheet> {
       controller: _scrollController,
       physics: const ClampingScrollPhysics(),
       itemCount: widget.newsList?.length ?? 0,
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) => const Divider(
+        color: Colors.grey,
+      ),
       itemBuilder: (context, index) {
         final news = widget.newsList![index];
         return Padding(

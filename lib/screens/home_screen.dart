@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: GlobalAppBar(toggleTheme: widget.toggleTheme),
       body: SingleChildScrollView(
         child: Column(
