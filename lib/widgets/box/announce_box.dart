@@ -32,13 +32,21 @@ class AnnounceBox extends StatelessWidget {
               ),
               const Gap(15),
               CustomText(
-                title: '별칭으로도 아이템 검색이 가능합니다.',
+                title: '1. 별칭으로도 아이템 검색이 가능합니다.',
                 fontSize: 20,
+              ),
+              CustomText(
+                title: 'e.g. 숨결 검색 => 용암/빙하의 숨결,태양의 가호/축복/은총 리스트업.',
+                fontSize: 17,
               ),
               const Gap(10),
               CustomText(
-                title: 'e.g. 숨결 검색 => 용암/빙하의 숨결,태양의 가호/축복/은총 리스트업.',
+                title: '2. 현재 시세 그래프는 수요가 많은 아이템에 한해 제공됩니다. ',
                 fontSize: 20,
+              ),
+              CustomText(
+                title: 'e.g. 유각, 강화재료',
+                fontSize: 17,
               ),
             ],
           ),
