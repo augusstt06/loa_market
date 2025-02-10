@@ -6,6 +6,7 @@ import 'package:loa_market/models/api_data/get.dart';
 
 import 'package:loa_market/service/api/get_crystal.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/basic/error_text.dart';
 import 'package:loa_market/widgets/basic/progress.dart';
 
 class CrystalBox extends StatefulWidget {
@@ -18,6 +19,7 @@ class CrystalBox extends StatefulWidget {
 class _CrystalBoxState extends State<CrystalBox> {
   GetCrystalResponse? crystalInfo;
   bool isLoading = true;
+  bool isError = false;
   Timer? _rerun;
 
   @override
@@ -29,14 +31,18 @@ class _CrystalBoxState extends State<CrystalBox> {
 
   Future<void> fetchCrystalInfo() async {
     try {
+      // throw Exception('test');
       final GetCrystalResponse crystalInfo = await fetchCrystal();
       setState(() {
         this.crystalInfo = crystalInfo;
         isLoading = false;
+        isError = false;
       });
     } catch (e) {
+      debugPrint('Error fetching crystal info: $e');
       setState(() {
         isLoading = false;
+        isError = true;
       });
     }
   }
@@ -70,8 +76,12 @@ class _CrystalBoxState extends State<CrystalBox> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: SizedBox(
-            child: isLoading
-                ? Progress()
+            child: isLoading || isError
+                ? ErrorText(
+                    isError: isError,
+                    isWhite: true,
+                    isProgressWhite: true,
+                  )
                 : Column(
                     children: [
                       CustomText(title: '크리스탈 시세', fontSize: 25, isBold: true),

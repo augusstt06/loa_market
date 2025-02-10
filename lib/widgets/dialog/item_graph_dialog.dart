@@ -1,8 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:loa_market/widgets/basic/custom_text.dart';
-import 'package:loa_market/widgets/basic/progress.dart';
+import 'package:loa_market/widgets/basic/error_text.dart';
 import 'package:loa_market/widgets/graph/bar_graph.dart';
 
 import '../../service/service.dart';
@@ -90,28 +88,10 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
         height: MediaQuery.of(context).size.height * 0.5,
         padding: const EdgeInsets.all(16),
         child: isLoading
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Center(child: Progress()),
-                  const Gap(25),
-                  isError
-                      ? CustomText(
-                          title: '에러가 발생했습니다.',
-                          fontSize: 18,
-                          isBold: true,
-                          isWhite:
-                              Theme.of(context).brightness == Brightness.dark,
-                        )
-                      : const SizedBox(),
-                  const Gap(5),
-                  CustomText(
-                    title: isError ? '다시 시도해주세요.' : '데이터를 가져오는 중입니다.',
-                    fontSize: 18,
-                    isBold: true,
-                    isWhite: Theme.of(context).brightness == Brightness.dark,
-                  ),
-                ],
+            ? ErrorText(
+                isError: isError,
+                isWhite: Theme.of(context).brightness == Brightness.dark,
+                isProgressWhite: false,
               )
             : Column(
                 children: [

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:loa_market/widgets/basic/appbar/bottom_sheet_appbar.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
-import 'package:loa_market/widgets/basic/progress.dart';
+import 'package:loa_market/widgets/basic/error_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsSheet extends StatefulWidget {
@@ -102,29 +102,12 @@ class _NewsSheetState extends State<NewsSheet> {
       ),
       child: widget.isLoading || widget.isError
           ? Center(
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Progress(), // 수정된 부분
-                const Gap(25),
-                widget.isError
-                    ? CustomText(
-                        title: '에러가 발생했습니다.',
-                        fontSize: 18,
-                        isBold: true,
-                        isWhite:
-                            Theme.of(context).brightness == Brightness.dark,
-                      )
-                    : const SizedBox(),
-                const Gap(5),
-                CustomText(
-                  title: widget.isError ? '다시 시도해주세요.' : '데이터를 가져오는 중입니다.',
-                  fontSize: 18,
-                  isBold: true,
-                  isWhite: Theme.of(context).brightness == Brightness.dark,
-                ),
-              ],
-            ))
+              child: ErrorText(
+                isError: widget.isError,
+                isWhite: Theme.of(context).brightness == Brightness.dark,
+                isProgressWhite: false,
+              ),
+            )
           : Stack(
               children: [
                 Column(
