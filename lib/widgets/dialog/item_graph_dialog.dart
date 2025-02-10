@@ -27,31 +27,38 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
 
       if (data != null) {
         dates = data.keys.toList()..sort();
+        points = [];
 
-        points = dates.asMap().entries.map((entry) {
+        for (var entry in dates.asMap().entries) {
           final index = entry.key.toDouble();
           final date = entry.value;
           final priceData = data[date] as Map<String, dynamic>;
-          final price = (priceData['YDayAvgPrice'] as num).toDouble();
 
           DateTime originalDate = DateTime.parse(date.replaceAll('.', '-'));
+          String today =
+              DateTime.now().toString().split(' ')[0].replaceAll('-', '.');
+
           DateTime yesterdayDate =
               originalDate.subtract(const Duration(days: 1));
-          dates[entry.key] =
+          String yesterdayString =
               '${yesterdayDate.year}.${yesterdayDate.month.toString().padLeft(2, '0')}.${yesterdayDate.day.toString().padLeft(2, '0')}';
 
-          return FlSpot(index, price);
-        }).toList();
+          points.add(
+              FlSpot(index, (priceData['YDayAvgPrice'] as num).toDouble()));
+          dates[entry.key] = yesterdayString;
+
+          if (date == today) {
+            points.add(FlSpot(
+                index, (priceData['CurrentMinPrice'] as num).toDouble()));
+            dates.add(date);
+          }
+        }
 
         setState(() {
+          priceHistory = data;
           isLoading = false;
         });
       }
-
-      setState(() {
-        priceHistory = data;
-        isLoading = false;
-      });
     } catch (e) {
       debugPrint('Error fetching price history: $e');
       setState(() {
