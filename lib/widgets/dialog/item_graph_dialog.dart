@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:loa_market/widgets/graph/bar_graph.dart';
 
 import '../../service/service.dart';
@@ -14,6 +16,7 @@ class ItemGraphDialog extends StatefulWidget {
 
 class _ItemGraphDialogState extends State<ItemGraphDialog> {
   final GetPriceHistoryService _itemService = GetPriceHistoryService();
+  bool isError = false;
   bool isLoading = true;
   Map<String, dynamic>? priceHistory;
 
@@ -63,6 +66,7 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
       debugPrint('Error fetching price history: $e');
       setState(() {
         isLoading = false;
+        isError = true;
       });
     }
   }
@@ -83,8 +87,27 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height * 0.5,
         padding: const EdgeInsets.all(16),
-        child: isLoading
-            ? const Center(child: CircularProgressIndicator())
+        child: !isLoading
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Center(child: CircularProgressIndicator()),
+                  const Gap(25),
+                  CustomText(
+                    title: '에러가 발생했습니다.',
+                    fontSize: 18,
+                    isBold: true,
+                    isWhite: Theme.of(context).brightness == Brightness.dark,
+                  ),
+                  const Gap(5),
+                  CustomText(
+                    title: '다시 시도해주세요.',
+                    fontSize: 18,
+                    isBold: true,
+                    isWhite: Theme.of(context).brightness == Brightness.dark,
+                  ),
+                ],
+              )
             : Column(
                 children: [
                   Text(
