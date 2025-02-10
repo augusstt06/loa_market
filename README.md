@@ -1,8 +1,46 @@
 # LoAuction
 
+## Contents
+
+- [LoAuction](#loauction)
+  - [Contents](#contents)
+  - [Overview](#overview)
+    - [Skills](#skills)
+    - [Installation](#installation)
+  - [Screens](#screens)
+    - [1. Home](#1-home)
+    - [2. Search Result](#2-search-result)
+    - [3. Graph Pop-up](#3-graph-pop-up)
+  - [API](#api)
+    - [Lostark API](#lostark-api)
+    - [External API](#external-api)
+
 ## Overview
 
-📌 When building the project for the first time, it takes some time due to firebase integration.
+An app that allows you to easily check the prices of items from the Lost Ark auction through the app.
+
+First of all, this project plans to give priority to searching for goods needed for character development.
+
+> 📌 When building the project for the first time, it takes some time due to firebase integration.
+
+Below are examples of items that meet the conditions:
+
+- **파괴/수호석**
+- **명예/운명의 파편**
+- **오레하/아비도스 융화재료**
+- **에스더의 기운**
+- **태양의 은총/축복/가호**
+- **용암/빙하의 숨결**
+- **유물/전설 각인서**
+
+### Skills
+
+<div style="display: flex; gap: 10px;">
+<img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=#02569B">
+<img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=#0175C2">
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=#FFCA28">
+
+</div>
 
 ### Installation
 
@@ -10,7 +48,7 @@
 
 ```bash
 git clone https://github.com/augusstt06/loa_market.git
-cd loa-market
+cd loa_market
 ```
 
 2. Install dependencies
@@ -43,22 +81,6 @@ firebase functions:shell
 # Function execution
 recordDailyPrices()
 ```
-
-## Features
-
-An app that allows you to easily check the prices of items from the Lost Ark auction through the app.
-
-First of all, this project plans to give priority to searching for goods needed for character development.
-
-Below are examples of items that meet the conditions:
-
-- **파괴/수호석**
-- **명예/운명의 파편**
-- **오레하/아비도스 융화재료**
-- **에스더의 기운**
-- **태양의 은총/축복/가호**
-- **용암/빙하의 숨결**
-- **유물/전설 각인서**
 
 ## Screens
 
@@ -98,7 +120,6 @@ When searching, a screen that lists items that match the search term.
   - List items that match the search term.
   - **Include the nickname by which users call the item.**
     > e.g "숨결" 검색시 용암/빙하의 숨결 이외, 태양의 축복, 은총, 가호 리스트업.
-  - When clicked on item, go to item detail screen.
 
 - **Item Price History Graph Widget (아이템 시세 그래프)**
   - Shows the price history of the item.
@@ -114,7 +135,7 @@ It shows the market price trend for the item.
 - **Info Widget (정보)**
 
   - Currently, there is not much data in the database, so daily price changes are displayed.
-  - In the future, we plan to display data at weekly intervals.
+  - In the future, I plan to display data at weekly intervals.
 
 ## API
 
