@@ -2,18 +2,16 @@
 
 ## Contents
 
-- [LoAuction](#loauction)
-  - [Contents](#contents)
-  - [Overview](#overview)
-    - [Skills](#skills)
-    - [Installation](#installation)
-  - [Screens](#screens)
-    - [1. Home](#1-home)
-    - [2. Search Result](#2-search-result)
-    - [3. Graph Pop-up](#3-graph-pop-up)
-  - [API](#api)
-    - [Lostark API](#lostark-api)
-    - [External API](#external-api)
+- [Overview](#overview)
+  - [Skills](#skills)
+  - [Installation](#installation)
+- [Screens](#screens)
+  - [1. Home](#1-home)
+  - [2. Search Result](#2-search-result)
+  - [3. Graph Pop-up](#3-graph-pop-up)
+- [API](#api)
+  - [Lostark API](#lostark-api)
+  - [External API](#external-api)
 
 ## Overview
 
