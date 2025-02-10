@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Progress extends StatelessWidget {
-  const Progress({super.key, this.isWhite = false});
-  final bool? isWhite;
+  const Progress({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(
         valueColor: AlwaysStoppedAnimation<Color>(
-          isWhite ?? false ? Colors.white : Colors.black,
+          Theme.of(context).colorScheme.primary,
         ),
       ),
     );

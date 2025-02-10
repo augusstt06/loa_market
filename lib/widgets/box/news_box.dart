@@ -15,6 +15,7 @@ class _NewsBoxState extends State<NewsBox> {
   String? title;
   String? date;
   bool isLoading = true;
+  bool isError = false;
   List<dynamic>? newsList;
 
   @override
@@ -31,8 +32,11 @@ class _NewsBoxState extends State<NewsBox> {
         isLoading = false;
       });
     } catch (e) {
+      debugPrint('Error fetching news data: $e');
       setState(() {
+        newsList = [];
         isLoading = false;
+        isError = true;
       });
     }
   }
@@ -44,6 +48,7 @@ class _NewsBoxState extends State<NewsBox> {
           return NewsSheet(
             newsList: newsList,
             isLoading: isLoading,
+            isError: isError,
           );
         });
   }

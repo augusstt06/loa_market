@@ -10,10 +10,11 @@ class NewsSheet extends StatefulWidget {
     super.key,
     required this.newsList,
     required this.isLoading,
+    required this.isError,
   });
   final List<dynamic>? newsList;
   final bool isLoading;
-
+  final bool isError;
   @override
   State<NewsSheet> createState() => _NewsSheetState();
 }
@@ -99,10 +100,30 @@ class _NewsSheetState extends State<NewsSheet> {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      child: widget.isLoading
-          ? const Center(
-              child: Progress(
-              isWhite: true,
+      child: widget.isLoading || widget.isError
+          ? Center(
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Progress(), // 수정된 부분
+                const Gap(25),
+                widget.isError
+                    ? CustomText(
+                        title: '에러가 발생했습니다.',
+                        fontSize: 18,
+                        isBold: true,
+                        isWhite:
+                            Theme.of(context).brightness == Brightness.dark,
+                      )
+                    : const SizedBox(),
+                const Gap(5),
+                CustomText(
+                  title: widget.isError ? '다시 시도해주세요.' : '데이터를 가져오는 중입니다.',
+                  fontSize: 18,
+                  isBold: true,
+                  isWhite: Theme.of(context).brightness == Brightness.dark,
+                ),
+              ],
             ))
           : Stack(
               children: [
