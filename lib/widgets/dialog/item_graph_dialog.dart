@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
+import 'package:loa_market/widgets/basic/progress.dart';
 import 'package:loa_market/widgets/graph/bar_graph.dart';
 
 import '../../service/service.dart';
@@ -92,7 +93,7 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Center(child: CircularProgressIndicator()),
+                  const Center(child: Progress()),
                   const Gap(25),
                   isError
                       ? CustomText(
