@@ -31,33 +31,34 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
       if (data != null) {
         dates = data.keys.toList()..sort();
         points = [];
+        List<String> displayDates = [];
+        double spotIndex = 0;
 
-        for (var entry in dates.asMap().entries) {
-          final index = entry.key.toDouble();
-          final date = entry.value;
+        for (var date in dates) {
           final priceData = data[date] as Map<String, dynamic>;
 
           DateTime originalDate = DateTime.parse(date.replaceAll('.', '-'));
-          String today =
-              DateTime.now().toString().split(' ')[0].replaceAll('-', '.');
-
           DateTime yesterdayDate =
               originalDate.subtract(const Duration(days: 1));
           String yesterdayString =
               '${yesterdayDate.year}.${yesterdayDate.month.toString().padLeft(2, '0')}.${yesterdayDate.day.toString().padLeft(2, '0')}';
 
           points.add(
-              FlSpot(index, (priceData['YDayAvgPrice'] as num).toDouble()));
-          dates[entry.key] = yesterdayString;
+              FlSpot(spotIndex, (priceData['YDayAvgPrice'] as num).toDouble()));
+          displayDates.add(yesterdayString);
+          spotIndex++;
 
-          if (date == today) {
+          // 마지막 날의 CurrentMinPrice는 현재 날짜데이터로 표시
+          if (date == dates.last && priceData['CurrentMinPrice'] != null) {
             points.add(FlSpot(
-                index, (priceData['CurrentMinPrice'] as num).toDouble()));
-            dates.add(date);
+                spotIndex, (priceData['CurrentMinPrice'] as num).toDouble()));
+            displayDates.add(date);
+            spotIndex++;
           }
         }
 
         setState(() {
+          dates = displayDates;
           priceHistory = data;
           isLoading = false;
         });
@@ -87,21 +88,24 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height * 0.5,
         padding: const EdgeInsets.all(16),
-        child: !isLoading
+        child: isLoading
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Center(child: CircularProgressIndicator()),
                   const Gap(25),
-                  CustomText(
-                    title: '에러가 발생했습니다.',
-                    fontSize: 18,
-                    isBold: true,
-                    isWhite: Theme.of(context).brightness == Brightness.dark,
-                  ),
+                  isError
+                      ? CustomText(
+                          title: '에러가 발생했습니다.',
+                          fontSize: 18,
+                          isBold: true,
+                          isWhite:
+                              Theme.of(context).brightness == Brightness.dark,
+                        )
+                      : const SizedBox(),
                   const Gap(5),
                   CustomText(
-                    title: '다시 시도해주세요.',
+                    title: isError ? '다시 시도해주세요.' : '데이터를 가져오는 중입니다.',
                     fontSize: 18,
                     isBold: true,
                     isWhite: Theme.of(context).brightness == Brightness.dark,
