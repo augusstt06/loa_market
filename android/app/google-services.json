@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:915731393585:android:8cc80997f520acbc5ff910",
+        "android_client_info": {
+          "package_name": "com.aug.loa_market"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDay7b5nj7OKwChQayyDhuNX3OlssHAe08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:915731393585:android:d1a4581549f56b425ff910",
         "android_client_info": {
           "package_name": "com.example.loa_market"

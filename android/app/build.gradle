@@ -17,7 +17,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    namespace = "com.example.loa_market"
+    namespace = "com.aug.loa_market"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
