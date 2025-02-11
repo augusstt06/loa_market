@@ -7,7 +7,6 @@ import 'package:loa_market/models/api_data/get.dart';
 import 'package:loa_market/service/api/get_crystal.dart';
 import 'package:loa_market/widgets/basic/custom_text.dart';
 import 'package:loa_market/widgets/basic/error_text.dart';
-import 'package:loa_market/widgets/basic/progress.dart';
 
 class CrystalBox extends StatefulWidget {
   const CrystalBox({super.key});
