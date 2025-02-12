@@ -2,17 +2,26 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:loa_market/widgets/basic/button/change_graph_view_button.dart';
+
 class BarGraph extends StatelessWidget {
   final List<FlSpot> graphPoints;
   final List<String> dates;
+  final bool isDaily;
+  final Function(bool) onChangeView;
 
   const BarGraph({
     super.key,
     required this.graphPoints,
     required this.dates,
+    required this.isDaily,
+    required this.onChangeView,
   });
 
   BarChartData _createMainChartData() {
+    if (graphPoints.isEmpty) {
+      return BarChartData();
+    }
     return BarChartData(
       gridData: FlGridData(
         show: true,
@@ -79,14 +88,19 @@ class BarGraph extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
-                  dates[value.toInt()].substring(5),
-                  style: const TextStyle(fontSize: 12),
+                  isDaily
+                      ? dates[value.toInt()].substring(5)
+                      : dates[value.toInt()],
+                  style: const TextStyle(
+                    fontSize: 12,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               );
             }
             return const Text('');
           },
-          reservedSize: 30,
+          reservedSize: isDaily ? 30 : 40,
         ),
       ),
       rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -102,7 +116,7 @@ class BarGraph extends StatelessWidget {
                 BarChartRodData(
                   toY: point.y,
                   color: Colors.blue,
-                  width: 16,
+                  width: isDaily ? 16 : 32,
                   borderRadius: BorderRadius.circular(4),
                 ),
               ],
@@ -112,28 +126,51 @@ class BarGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 40,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: BarChart(_createYAxisChartData()),
-          ),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: SizedBox(
-              width: math.max(
-                MediaQuery.of(context).size.width - 40,
-                graphPoints.length * 50.0,
-              ),
-              child: BarChart(_createMainChartData()),
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ChangeGraphViewButton(
+              text: 'Daily',
+              isSelected: isDaily,
+              onTap: () => onChangeView(true),
             ),
-          ),
+            const SizedBox(width: 8),
+            ChangeGraphViewButton(
+              text: 'Weekly',
+              isSelected: !isDaily,
+              onTap: () => onChangeView(false),
+            ),
+          ],
         ),
-      ],
-    );
+      ),
+      Expanded(
+        child: Row(
+          children: [
+            SizedBox(
+              width: 40,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: isDaily ? 30 : 40),
+                child: BarChart(_createYAxisChartData()),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  width: math.max(
+                    MediaQuery.of(context).size.width - 40,
+                    graphPoints.length * (isDaily ? 50.0 : 100.0),
+                  ),
+                  child: BarChart(_createMainChartData()),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ]);
   }
 }
