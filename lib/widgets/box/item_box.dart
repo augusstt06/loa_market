@@ -84,6 +84,7 @@ class ItemBox extends StatelessWidget {
                             context: context,
                             builder: (context) => ItemGraphDialog(
                               itemName: item.name,
+                              currentPrice: item.recentPrice,
                             ),
                           );
                         },
