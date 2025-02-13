@@ -57,35 +57,38 @@ class _NewsBoxState extends State<NewsBox> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Material(
-        color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(10),
-        child: InkWell(
-          onTap: _showNewsSheet,
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 800),
+        child: Material(
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(10),
-          child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.secondary,
-                  width: 3,
+          child: InkWell(
+            onTap: _showNewsSheet,
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.secondary,
+                    width: 3,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: CustomText(
-                          title: '최근 로아 소식',
-                          fontSize: 22,
-                          isBold: true,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: CustomText(
+                            title: '최근 로아 소식',
+                            fontSize: 22,
+                            isBold: true,
+                          ),
                         ),
-                      ),
-                    ],
-                  ))),
+                      ],
+                    ))),
+          ),
         ),
       ),
     );

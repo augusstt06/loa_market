@@ -33,7 +33,7 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
     weeklyPoints = [];
     weeklyDates = [];
 
-    // 첫 번째 수요일 찾기
+    // 첫 번째 수요일
     int firstWedIndex = 0;
     while (firstWedIndex < dailyDates.length) {
       DateTime date =
@@ -81,19 +81,25 @@ class _ItemGraphDialogState extends State<ItemGraphDialog> {
         dailyDates = [];
         double spotIndex = 0;
 
-        // DB에서 받아온 데이터 처리
         for (var date in dates) {
           final priceData = data[date] as Map<String, dynamic>;
+
+          final DateTime originalDate =
+              DateTime.parse(date.replaceAll('.', '-'));
+          final DateTime previousDay =
+              originalDate.subtract(const Duration(days: 1));
+          final String adjustedDate =
+              previousDay.toString().substring(0, 10).replaceAll('-', '.');
+
           dailyPoints.add(
               FlSpot(spotIndex, (priceData['YDayAvgPrice'] as num).toDouble()));
-          dailyDates.add(date);
+          dailyDates.add(adjustedDate);
           spotIndex++;
         }
 
-        // 오늘의 데이터는 currentPrice로 추가
         dailyPoints.add(FlSpot(spotIndex, widget.currentPrice.toDouble()));
-        dailyDates.add(
-            DateTime.now().toString().substring(0, 10).replaceAll('-', '.'));
+        final today = DateTime.now();
+        dailyDates.add(today.toString().substring(0, 10).replaceAll('-', '.'));
 
         setState(() {
           _calculateWeeklyData();

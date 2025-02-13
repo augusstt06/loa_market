@@ -42,19 +42,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: GlobalAppBar(toggleTheme: widget.toggleTheme),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Search(
-                  toggleTheme: widget.toggleTheme,
-                  onSearch: _showSearchResultDialog),
-            ),
-            const AnnounceBox(),
-            NewsBox(),
-            CrystalBox(),
-          ],
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Search(
+                    toggleTheme: widget.toggleTheme,
+                    onSearch: _showSearchResultDialog),
+              ),
+              Center(child: const AnnounceBox()),
+              Center(child: NewsBox()),
+              Center(child: CrystalBox()),
+            ],
+          ),
         ),
       ),
     );

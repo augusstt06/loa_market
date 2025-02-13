@@ -39,7 +39,7 @@ class ItemBox extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.2,
                   height: 60,
@@ -47,7 +47,7 @@ class ItemBox extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 7,
+                flex: 3,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.45,
                   height: 100,
