@@ -38,46 +38,53 @@ class ItemBox extends StatelessWidget {
           height: 100,
           child: Row(
             children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.2,
-                height: 60,
-                child: Image.network(item.icon),
+              Expanded(
+                flex: 2,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: 60,
+                  child: Image.network(item.icon),
+                ),
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.45,
-                height: 100,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomText(
-                      title: isEngraveItem
-                          ? '${item.grade} ${item.name.replaceAll('각인서', '').trim()}'
-                          : item.name,
-                      fontSize: 17,
-                      isBold: true,
-                    ),
-                    const Gap(10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(
-                          title: addComma(item.recentPrice),
-                          fontSize: 20,
-                          isBold: true,
-                        ),
-                        const Gap(10),
-                        Image.asset(
-                          'assets/images/골드.png',
-                          width: 25,
-                          height: 25,
-                        ),
-                      ],
-                    ),
-                  ],
+              Expanded(
+                flex: 7,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomText(
+                        title: isEngraveItem
+                            ? '${item.grade} ${item.name.replaceAll('각인서', '').trim()}'
+                            : item.name,
+                        fontSize: 17,
+                        isBold: true,
+                      ),
+                      const Gap(10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomText(
+                            title: addComma(item.recentPrice),
+                            fontSize: 20,
+                            isBold: true,
+                          ),
+                          const Gap(10),
+                          Image.asset(
+                            'assets/images/골드.png',
+                            width: 25,
+                            height: 25,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               _showPriceHistoryButton
                   ? Expanded(
+                      flex: 1,
                       child: IconButton(
                         onPressed: () {
                           showDialog(
@@ -95,7 +102,10 @@ class ItemBox extends StatelessWidget {
                         ),
                       ),
                     )
-                  : const SizedBox.shrink(),
+                  : Expanded(
+                      flex: 1,
+                      child: const SizedBox.shrink(),
+                    ),
             ],
           ),
         ),
